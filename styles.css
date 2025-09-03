@@ -1,0 +1,148 @@
+/* Genel reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.top {
+  top: 0;
+  position: relative;
+  min-height: 100vh; /* Daha esnek */
+  width: 100%;  
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #7c90ea 0%, #672f9f 100%);
+  display: flex;
+  flex-direction: column; /* Alt alta hizala */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.top h1 {
+  font-size: clamp(2rem, 6vw, 4rem); /* Ekrana göre otomatik boyut */
+  margin: 0.5rem 0;
+}
+
+.gradient-text {
+  font-weight: bold;
+  background: linear-gradient(90deg, #ffffff 0%, #d2a789 50%, #cc11d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  background-clip: text;
+  color: transparent;
+}
+.gradient-text2{
+    color: aliceblue;
+}
+
+.about-top{
+    position: relative;
+    top: 30px;    
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #dd6e12 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.app{
+  position: relative;
+  top: 30px;  
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #dd6e12 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.ecosystem {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.ecosystem h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.ecosystem p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 3rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-align: left;
+  max-width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card ul li {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0.5rem 0;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.card ul li::before {
+  content: "•";
+  color: #7c3aed; /* mor nokta */
+  position: absolute;
+  left: 0;
+}
