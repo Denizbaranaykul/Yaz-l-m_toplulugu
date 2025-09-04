@@ -5,16 +5,19 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
+
 .top {
   top: 0;
   position: relative;
-  min-height: 100vh; /* Daha esnek */
-  width: 100%;  
+  min-height: 100vh;
+  /* Daha esnek */
+  width: 100%;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   background: linear-gradient(135deg, #7c90ea 0%, #672f9f 100%);
   display: flex;
-  flex-direction: column; /* Alt alta hizala */
+  flex-direction: column;
+  /* Alt alta hizala */
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -22,7 +25,8 @@
 }
 
 .top h1 {
-  font-size: clamp(2rem, 6vw, 4rem); /* Ekrana göre otomatik boyut */
+  font-size: clamp(2rem, 6vw, 4rem);
+  /* Ekrana göre otomatik boyut */
   margin: 0.5rem 0;
 }
 
@@ -30,17 +34,18 @@
   font-weight: bold;
   background: linear-gradient(90deg, #ffffff 0%, #d2a789 50%, #cc11d6 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; 
+  -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
-.gradient-text2{
-    color: aliceblue;
+
+.gradient-text2 {
+  color: aliceblue;
 }
 
-.about-top{
-    position: relative;
-    top: 30px;    
+.about-top {
+  position: relative;
+  top: 30px;
   padding: 12px 20px;
   border: none;
   border-radius: 25px;
@@ -52,9 +57,9 @@
   font-size: 0.9rem;
 }
 
-.app{
+.app {
   position: relative;
-  top: 30px;  
+  top: 30px;
   padding: 12px 20px;
   border: none;
   border-radius: 25px;
@@ -93,7 +98,7 @@
   background: #fff;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   text-align: left;
   max-width: 320px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -101,7 +106,7 @@
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
 .icon {
@@ -142,7 +147,292 @@
 
 .card ul li::before {
   content: "•";
-  color: #7c3aed; /* mor nokta */
+  color: #7c3aed;
+  /* mor nokta */
   position: absolute;
   left: 0;
+}
+
+.Memembers {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #f8f8f8;
+}
+
+.Memembers h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.Memembers p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 3rem;
+}
+
+
+
+
+
+
+
+/* Projeler container */
+.projects-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+/* Proje kartları */
+.project-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Proje resimleri */
+.project-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+/* Proje içeriği */
+.project-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.project-content h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.project-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* Proje butonları */
+.project-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.btn-demo,
+.btn-code {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.btn-demo {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-demo:hover {
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-code {
+  background: transparent;
+  color: #667eea;
+  border: 2px solid #667eea;
+}
+
+.btn-code:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .projects-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project-card {
+    margin: 0 10px;
+  }
+
+  .project-buttons {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .btn-demo,
+  .btn-code {
+    flex: 1;
+  }
+}
+
+
+.all-members {
+  position: relative;
+  top: 25px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  background: #667eea;
+  color: white;
+  border: 2px solid #363943;
+}
+
+
+.app-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  padding: 60px;
+  border-radius: 20px;
+  gap: 40px;
+}
+
+.app-content {
+  flex: 1;
+}
+
+.app-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.app-content p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.app-label {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.app-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 25px 0;
+}
+
+.app-features li {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.download-buttons button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.download-buttons button:hover {
+  transform: scale(1.05);
+}
+
+.appstore {
+  background: #000;
+  color: #fff;
+}
+
+.googleplay {
+  background: #34a853;
+  color: #fff;
+}
+
+.requirement {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.app-qr {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.qr-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 300px;
+}
+
+.qr-icon {
+  height: 10px;
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.qr-placeholder {
+  width: 120px;
+  height: 120px;
+  background: #fff;
+  margin: 15px auto 0;
+  border-radius: 10px;
+}
+
+.qr-image {
+  width: 120px;
+  height: 120px;
+  margin-top: 15px;
+  border-radius: 10px;
 }
