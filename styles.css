@@ -770,3 +770,160 @@ section {
   transform: translateY(-50%) scale(1);
   box-shadow: none;
 }
+
+/* =========================================
+   MOBİL MENÜ VE RESPONSIVE AYARLAR
+   (styles.css EN ALTINA EKLE)
+   ========================================= */
+
+/* Hamburger Menü (Masaüstünde Gizli) */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+  border-radius: 3px;
+}
+
+/* --- MOBİL CİHAZLAR İÇİN MEDIA QUERY (Max-Width: 768px) --- */
+@media (max-width: 768px) {
+
+  /* 1. Navbar Düzenlemesi */
+  .navbar {
+    padding: 0 20px;
+    /* Kenar boşluklarını azalt */
+  }
+
+  .Logo_main span {
+    font-size: 1.1rem;
+    /* Logo yazısını küçült */
+  }
+
+  /* Hamburger Görünür Olsun */
+  .hamburger {
+    display: block;
+    z-index: 1001;
+    /* En üstte */
+  }
+
+  /* Hamburger Animasyonu (Çarpı Olma) */
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* 2. Menü Listesi (Mobilde Açılır Kapanır Yapı) */
+  .liste {
+    position: fixed;
+    left: -100%;
+    /* Ekranın solunda gizli başla */
+    top: 70px;
+    /* Header yüksekliği kadar aşağıdan başla */
+    gap: 0;
+    flex-direction: column;
+    background-color: rgba(2, 6, 23, 0.95);
+    /* Koyu arka plan */
+    backdrop-filter: blur(15px);
+    /* Buzlu cam efekti */
+    width: 100%;
+    height: calc(100vh - 70px);
+    /* Ekranın geri kalanını kapla */
+    text-align: center;
+    transition: 0.3s;
+    padding-top: 40px;
+    z-index: 999;
+    border-top: 1px solid var(--border);
+  }
+
+  .liste.active {
+    left: 0;
+    /* Menüyü ekrana getir */
+  }
+
+  .liste a {
+    margin: 20px 0;
+    font-size: 1.5rem;
+    /* Linkleri büyüt */
+    display: block;
+    width: 100%;
+  }
+
+  /* 3. Hero Bölümü Düzeltmeleri */
+  .top {
+    padding: 6rem 1rem 2rem 1rem;
+    /* Üst boşluğu artır */
+  }
+
+  .gradient-text {
+    font-size: 2.5rem;
+    /* Başlığı küçült */
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    /* Butonları alt alta diz */
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    /* Butonları tam genişlik yap */
+  }
+
+  /* 4. Kartlar ve Grid */
+  .cards {
+    grid-template-columns: 1fr;
+    /* Kartları tek sütun yap */
+    padding: 0 10px;
+  }
+
+  /* 5. Slider / Carousel */
+  .carousel-wrapper {
+    padding: 0 10px;
+  }
+
+  .nav-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  /* 6. Intro Animasyonu Mobil */
+  .dragon-container {
+    width: 200px;
+    /* Mobilde ejderhayı küçült */
+    height: 200px;
+  }
+
+  .intro-logo {
+    font-size: 1.5rem;
+  }
+
+  .intro-circle-svg {
+    transform: translate(-50%, -50%) scale(0.7) rotate(-90deg);
+    /* Daireyi küçült */
+  }
+}

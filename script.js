@@ -182,3 +182,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// =========================================================
+// MOBİL MENÜ İŞLEMLERİ (script.js EN ALTINA EKLE)
+// =========================================================
+
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".liste");
+const navLinksMobile = document.querySelectorAll(".nav-link"); // HTML'de linklere class eklemiştik
+
+if (hamburger && navMenu) {
+    // 1. Hamburger butonuna tıklama
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+    });
+
+    // 2. Linke tıklayınca menüyü kapat
+    // (Not: index.html'de liste içindeki <a> etiketlerine class="nav-link" eklemeyi unutma veya aşağıyı '.liste a' yap)
+    document.querySelectorAll(".liste a").forEach(n => n.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+    }));
+
+    // 3. Menü dışına tıklayınca kapat (Opsiyonel Kullanıcı Deneyimi)
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('active')) {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }
+    });
+}
