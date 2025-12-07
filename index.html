@@ -1,39 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yazılım Geliştirme Topluluğu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
-  <main>
-    <div class="top">
-      <h1 class="gradient-text">Yazılım Geliştir, Üretimini Paylaş</h1>
-      <h2 class="gradient-text2">Öğrenen ve üreten bir geliştirici topluluğu. Birlikte kod yazıyor, projeler
-        geliştiriyor ve bilgi paylaşımı yapıyoruz.</h2>
-      <div class="buttons">
+  <div id="intro-overlay">
+    <div class="intro-content">
+      <svg class="intro-circle-svg" width="300" height="300" viewBox="0 0 300 300">
+        <circle class="circle-path" cx="150" cy="150" r="140" stroke="#3b82f6" stroke-width="4" fill="none" />
+      </svg>
 
-        <button class="about-top">Hakkımızda</button>
-        <button class="app">Uygulamamızı indirin</button>
+      <div class="intro-logo"></div>
+
+      <div class="dragon-container">
+        <img src="logo_son.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <header class="head">
+    <nav class="navbar">
+      <a href="#" class="Logo_main">
+        <img src="logo_son.png" alt="Logo" class="nav-logo">
+        <span>Yazılım Geliştirme Topluluğu</span>
+      </a>
+      <ul class="liste">
+        <a href="#about">
+          <h3>Hakkımızda</h3>
+        </a>
+        <a href="#projects">
+          <h3>Projeler</h3>
+        </a>
+        <a href="#contact">
+          <h3>İletişim</h3>
+        </a>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="top" id="about">
+      <canvas id="matrix-canvas"></canvas>
+      <div class="hero-content">
+        <span class="badge"> Yazılım Geliştirme Topluluğu</span>
+        <h1 class="gradient-text">Yazılım Geliştir,<br>Üretimini Paylaş.</h1>
+        <h2 class="subtitle">Öğrenen ve üreten bir geliştirici topluluğu. Birlikte kod yazıyor, projeler
+          geliştiriyor ve bilgi paylaşıyoruz.</h2>
+        <div class="buttons">
+          <button class="btn-primary" onclick="window.location.href='basvuru.html'">Aramıza Katıl</button>
+          <button class="btn-secondary">Uygulamayı İndir</button>
+        </div>
+      </div>
+      <div class="glow-effect"></div>
+    </div>
+
+    <section class="ecosystem">
+      <div class="section-header">
+        <h1>Büyüyen Ekosistemimiz</h1>
+        <p>Öğrenmeyi seven, üretmeyi hedefleyen geliştiricilerle tanış.</p>
       </div>
 
-    </div>
-    <section class="ecosystem">
-      <h1>Biz kimiz ve Büyüyen Ekosistemimiz</h1>
-      <p>Öğrenmeyi seven, üretmeyi hedefleyen ve paylaşmaya inanan geliştiricilerle tanış</p>
-
       <div class="cards">
-        <!-- Öğren Kartı -->
         <div class="card">
-          <div class="icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
-            📘
-          </div>
+          <div class="icon blue-glow">📘</div>
           <h2>Öğren</h2>
-          <p>Mentörlerimiz eşliğinde yeni teknolojiler keşfet, workshop'lara katıl ve kendini geliştir.</p>
+          <p>Mentörlerimiz eşliğinde yeni teknolojiler keşfet ve kendini geliştir.</p>
           <ul>
             <li>Haftalık Workshop'lar</li>
             <li>Video Serileri</li>
@@ -41,13 +80,10 @@
           </ul>
         </div>
 
-
         <div class="card">
-          <div class="icon" style="background: linear-gradient(135deg, #bc4e9c, #f80759);">
-            💡
-          </div>
+          <div class="icon purple-glow">💡</div>
           <h2>Üret</h2>
-          <p>Fikirlerini gerçek projelere dönüştür, hackathon'lara katıl ve portfolyonu güçlendir.</p>
+          <p>Fikirlerini gerçek projelere dönüştür ve portfolyonu güçlendir.</p>
           <ul>
             <li>Proje İncelemeleri</li>
             <li>Hackathon Etkinlikleri</li>
@@ -55,13 +91,10 @@
           </ul>
         </div>
 
-
         <div class="card">
-          <div class="icon" style="background: linear-gradient(135deg, #ff512f, #dd2476);">
-            🔗
-          </div>
+          <div class="icon pink-glow">🔗</div>
           <h2>Paylaş</h2>
-          <p>Bilgini toplulukla paylaş, sunum yap ve yazılım ekosisteminin gelişimine katkıda bulun.</p>
+          <p>Bilgini toplulukla paylaş ve ekosisteme katkıda bulun.</p>
           <ul>
             <li>Tech Talk'lar</li>
             <li>Blog Yazıları</li>
@@ -70,108 +103,92 @@
         </div>
       </div>
     </section>
-    <section class="Memembers">
-      <h1>Tutkulu Geliştiricilerimiz</h1>
-      <p>Farklı uzmanlık alanlarından deneyimli geliştiricilerle tanışın</p>
+
+    <section class="Memembers" id="projects">
+      <div class="section-header">
+        <h1>Tutkulu Geliştiricilerimiz</h1>
+        <p>Farklı uzmanlık alanlarından deneyimli geliştiricilerle tanışın.</p>
+      </div>
 
       <div class="projects-container">
         <div class="project-card">
           <div class="project-image">
-            <img src="scarface.png" alt="E-Ticaret Projesi">
+            <img src="scarface2.jpeg" alt="Ahmet Benli">
           </div>
           <div class="project-content">
+            <div class="role-badge">Backend Developer</div>
             <h3>Ahmet Benli</h3>
-            <p>Backend sistemleri ve veritabanı uzmanı. Ölçeklenebilir mimari ve performans optimizasyonu konularında
-              deneyimli.
-            </p>
+            <p>Backend sistemleri ve veritabanı uzmanı. Ölçeklenebilir mimari konularında deneyimli.</p>
             <div class="project-buttons">
-              <button class="btn-demo">Linkedin</button>
-              <button class="btn-code"
-                onclick="go_to_link('https://github.com/AHMETBNL?tab=repositories')">GitHub</button>
+              <button class="btn-sm-primary" onclick="go_to_link('https://github.com/AHMETBNL')">GitHub</button>
+              <button class="btn-sm-secondary">LinkedIn</button>
             </div>
           </div>
         </div>
+
         <div class="project-card">
           <div class="project-image">
-            <img src="pp.jpeg" alt="E-Ticaret Projesi">
+            <img src="pp.jpeg" alt="Deniz Baran Aykul">
           </div>
           <div class="project-content">
+            <div class="role-badge">Full Stack Developer</div>
             <h3>Deniz Baran Aykul</h3>
-            <p>Full Stack web geliştirme , mobilde hem android hem IOS ta modern çözümler yaratan yazılım geliştiricisi
-              Topluluk başkan yardımcısı
-            </p>
+            <p>Web ve Mobil geliştirme uzmanı. Hem Android hem iOS'ta modern çözümler üretir.</p>
             <div class="project-buttons">
-              <button class="btn-demo"
-                onclick="go_to_link('https://www.linkedin.com/in/deniz-aykul-0195b919b/')">Linkedin</button>
-              <button class="btn-code"
+              <button class="btn-sm-primary"
                 onclick="go_to_link('https://denizbaranaykul.github.io/portfolyo/')">GitHub</button>
+              <button class="btn-sm-secondary"
+                onclick="go_to_link('https://www.linkedin.com/in/deniz-aykul-0195b919b/')">LinkedIn</button>
             </div>
           </div>
         </div>
+
         <div class="project-card">
           <div class="project-image">
-            <img src="atakan.png" alt="E-Ticaret Projesi">
+            <img src="atakan.png" alt="Atakan Çelik">
           </div>
           <div class="project-content">
+            <div class="role-badge">Frontend Lead</div>
             <h3>Atakan Çelik</h3>
-            <p>UI/UX odaklı frontend uzmanı. Kullanıcı deneyimi ve erişilebilirlik konularında mentor.Topluluğumuzun
-              bAŞKanı.
-            </p>
+            <p>UI/UX odaklı frontend uzmanı. Kullanıcı deneyimi ve erişilebilirlik mentoru.</p>
             <div class="project-buttons">
-              <button class="btn-demo" onclick="go_to_link('')">Linkedin</button>
-              <button class="btn-code" onclick="go_to_link('')">GitHub</button>
+              <button class="btn-sm-primary">GitHub</button>
+              <button class="btn-sm-secondary">LinkedIn</button>
             </div>
           </div>
         </div>
-
-
       </div>
-      <button class="all-members">Tüm üyeler</button>
-
-
-
-
-    </section>
-    <section class="app-section">
-      <div class="app-content">
-        <h4 class="app-label">📱 Mobil Uygulama</h4>
-        <h1>Topluluğa Her Yerden Erişin</h1>
-        <p>
-          iOS ve Android uygulamalarımızla etkinlikleri takip edin, projeleri inceleyin
-          ve toplulukla bağlantıda kalın.
-        </p>
-
-        <ul class="app-features">
-          <li>⭐ <strong>4.8/5 Kullanıcı Puanı</strong> <br> 500+ indirme, mükemmel geri bildirimler</li>
-          <li>🛡️ <strong>Güvenli & Gizlilik Odaklı</strong> <br> Verileriniz güvende, reklamsız deneyim</li>
-          <li>⚡ <strong>Gerçek Zamanlı Bildirimler</strong> <br> Yeni etkinlik ve duyurulardan haberdar olun</li>
-        </ul>
-
-        <div class="download-buttons">
-          <button class="appstore">App Store'dan İndir</button>
-          <button class="googleplay">Google Play'den İndir</button>
-        </div>
-
-        <p class="requirement">iOS 12.0+ ve Android 7.0+ gereklidir</p>
-      </div>
-
-      <div class="app-qr">
-        <div class="qr-box">
-          <div class="qr-icon"></div>
-          <h3>QR Kod ile Hızlı İndirme</h3>
-          <p>Telefonunuzun kamerasıyla QR kodu okutun ve direkt uygulama mağazasına yönlenin</p>
-          <img src="frame.png" alt="QR Kod" class="qr-image">
-        </div>
-      </div>
-
+      <button class="all-members">Tüm Üyeleri Gör</button>
     </section>
 
+    <section class="app-section" id="contact">
+      <div class="app-container glass-panel">
+        <div class="app-content">
+          <span class="app-label">📱 Mobil Uygulama</span>
+          <h1>Topluluğa Her Yerden Erişin</h1>
+          <p>iOS ve Android uygulamalarımızla etkinlikleri takip edin ve toplulukla bağlantıda kalın.</p>
 
+          <ul class="app-features">
+            <li>⭐ <strong>4.8/5 Puan</strong> - 500+ İndirme</li>
+            <li>🛡️ <strong>Güvenli</strong> - Reklamsız deneyim</li>
+          </ul>
 
+          <div class="download-buttons">
+            <button class="store-btn appstore">App Store</button>
+            <button class="store-btn googleplay">Google Play</button>
+          </div>
+        </div>
 
-    <script src="script.js"></script>
+        <div class="app-qr">
+          <div class="qr-box">
+            <h3>Hemen İndir</h3>
+            <img src="frame.png" alt="QR Kod" class="qr-image">
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+  <script src="script.js"></script>
 </body>
-
 
 </html>

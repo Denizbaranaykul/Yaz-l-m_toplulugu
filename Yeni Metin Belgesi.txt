@@ -1,0 +1,15 @@
+  --bg-dark: #20204c;
+  /* Çok koyu lacivert/siyah */
+  --bg-card: rgba(30, 41, 59, 0.4);
+  /* Şeffaf lacivert */
+  --primary: #3b82f6;
+  /* Neon Mavi */
+  --secondary: #6366f1;
+  /* İndigo */
+  --accent: #06b6d4;
+  /* Cyan */
+  --text-main: #f1f5f9;
+  /* Kırık Beyaz */
+  --text-muted: #94a3b8;
+  /* Gri */
+  --border: rgba(255, 255, 255, 0.1);

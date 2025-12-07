@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Başvuru Formu - Yazılım Geliştirme Topluluğu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Sadece bu sayfaya özel ek stiller */
+        .form-container {
+            max-width: 800px;
+            margin: 120px auto 50px;
+            /* Navbar payı */
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Radio Button Tasarımı */
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .radio-option input {
+            display: none;
+            /* Varsayılan butonu gizle */
+        }
+
+        .radio-box {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .radio-option input:checked+.radio-box {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="head">
+        <nav class="navbar">
+            <a href="index.html" class="Logo_main">
+                <img src="logo_son.png" alt="Logo" class="nav-logo">
+                <span>Yazılım Geliştirme Topluluğu</span>
+            </a>
+            <ul class="liste">
+                <a href="index.html#about">Hakkımızda</a>
+                <a href="index.html#projects">Projeler</a>
+                <a href="index.html#contact">İletişim</a>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container glass-panel">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <h1>Aramıza Katıl</h1>
+                <p>Formu eksiksiz doldurarak başvurunu bize ilet.</p>
+            </div>
+
+            <form id="basvuruForm">
+                <div class="form-group">
+                    <label>Adınız Soyadınız</label>
+                    <input type="text" id="adsoyad" required placeholder="Örn: Ahmet Benli">
+                </div>
+
+                <div class="form-group">
+                    <label>Bölümünüz</label>
+                    <input type="text" id="bolum" required placeholder="Örn: Yönetim Bilişim Sistemleri">
+                </div>
+
+                <div class="form-group">
+                    <label>Kaçıncı Sınıfsınız?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="sinif" value="0" required>
+                            <span class="radio-box">Hazırlık</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sinif" value="1">
+                            <span class="radio-box">1. Sınıf</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sinif" value="2">
+                            <span class="radio-box">2. Sınıf</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sinif" value="3">
+                            <span class="radio-box">3. Sınıf</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sinif" value="4">
+                            <span class="radio-box">4. Sınıf</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display: flex; gap: 20px;">
+                    <div style="flex:1;">
+                        <label>Yaşınız</label>
+                        <input type="number" id="yas" required placeholder="21">
+                    </div>
+                    <div style="flex:1;">
+                        <label>Telefon Numaranız</label>
+                        <input type="tel" id="telefon" required placeholder="0555 555 55 55">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Adresiniz</label>
+                    <input type="email" id="email" required placeholder="ornek@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Hangi Departmanda Görev Almak İstersiniz?</label>
+                    <select id="departman" required>
+                        <option value="" disabled selected>Lütfen Seçiniz</option>
+                        <option value="Ar-Ge">Ar-Ge Departmanı</option>
+                        <option value="Sosyal Medya">Sosyal Medya Departmanı</option>
+                        <option value="İletişim ve Sponsorluk">İletişim ve Sponsorluk Departmanı</option>
+                        <option value="Proje ve Eğitim">Proje ve Eğitim Departmanı</option>
+                        <option value="Organizasyon">Organizasyon Departmanı</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Seçtiğiniz departmanla ilgili tecrübeniz var mı? Yoksa neden bu departmanı
+                        istiyorsunuz?</label>
+                    <textarea id="soru_departman" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Yazılımla ilgili bir geçmişiniz var mı? Varsa açıklayınız.</label>
+                    <textarea id="soru_yazilim" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Okul dışında herhangi bir uğraşınız var mı? Varsa açıklayınız.</label>
+                    <textarea id="soru_hobi" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Topluluk için yararlı olur dediğiniz bir fikriniz var mı?</label>
+                    <textarea id="soru_fikir" required></textarea>
+                </div>
+
+                <button type="submit" class="btn-primary submit-btn">Başvuruyu Gönder</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="basvuru.js"></script>
+</body>
+
+</html>

@@ -1,210 +1,354 @@
-/* Genel reset */
+/* --- MODERN RESET & DEĞİŞKENLER --- */
+:root {
+  --bg-dark: #20204c;
+  /* Çok koyu lacivert/siyah */
+  --bg-card: rgba(30, 41, 59, 0.4);
+  /* Şeffaf lacivert */
+  --primary: #08a0b4;
+  /* Neon Mavi */
+  --secondary: #6366f1;
+  /* İndigo */
+  --accent: #06b6d4;
+  /* Cyan */
+  --text-main: #f1f5f9;
+  /* Kırık Beyaz */
+  --text-muted: #94a3b8;
+  /* Gri */
+  --border: rgba(255, 255, 255, 0.1);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Outfit', sans-serif;
 }
 
-.top {
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* --- HEADER / NAVBAR --- */
+header {
+  position: fixed;
   top: 0;
-  position: relative;
-  min-height: 100vh;
-  /* Daha esnek */
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(135deg, #7c90ea 0%, #672f9f 100%);
+  z-index: 1000;
+  padding: 20px 40px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(5px);
+}
+
+header.scrolled {
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+  padding: 15px 40px;
+}
+
+.Logo_main {
+  display: flex;
+  /* Resim ve yazıyı yan yana dizer */
+  align-items: center;
+  /* Dikey olarak birbirlerine ortalar */
+  gap: 12px;
+  /* Logo ile yazı arasına 12px boşluk koyar */
+
+  /* Yazı font ayarları */
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+/* Navbar'daki logo resminin boyut ayarı */
+.nav-logo {
+  height: 40px;
+  /* Navbar'a sığacak ideal yükseklik */
+  width: auto;
+  /* Genişlik otomatik ayarlansın (resim bozulmaz) */
+  object-fit: contain;
+  /* Resim kutuya tam oturur */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.Logo_main {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.liste {
+  display: flex;
+  gap: 30px;
+
+}
+
+.liste a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+  font-size: 0.95rem;
+}
+
+.liste a:hover {
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+
+/* Matrix Canvas Ayarları */
+#matrix-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  /* Arka planın üstünde, yazının altında */
+  opacity: 0.25;
+  /* Çok parlak olmasın, arka planda hafifçe aksın */
+
+  /* SİHİRLİ DOKUNUŞ: Maskeleme */
+  /* Sol ve Sağ kenarlarda %100 görünür (siyah), ortada şeffaf */
+  mask-image: linear-gradient(90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 15%,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0) 70%,
+      rgba(0, 0, 0, 1) 85%,
+      rgba(0, 0, 0, 1) 100%);
+  -webkit-mask-image: linear-gradient(90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 15%,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0) 70%,
+      rgba(0, 0, 0, 1) 85%,
+      rgba(0, 0, 0, 1) 100%);
+}
+
+/* Yazıların Canvas'ın üstünde kalması için z-index artırıyoruz */
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- HERO SECTION --- */
+.top {
+  min-height: 100vh;
+  width: 100%;
+  /* Modern Grid Arka Plan */
+  background:
+    radial-gradient(circle at 50% 50%, rgba(29, 78, 216, 0.15), transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-color: var(--bg-dark);
   display: flex;
   flex-direction: column;
-  /* Alt alta hizala */
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 2rem;
+  position: relative;
+  overflow: hidden;
 }
 
-.top h1 {
-  font-size: clamp(2rem, 6vw, 4rem);
-  /* Ekrana göre otomatik boyut */
-  margin: 0.5rem 0;
+.badge {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  margin-bottom: 20px;
+  display: inline-block;
 }
 
 .gradient-text {
-  font-weight: bold;
-  background: linear-gradient(90deg, #ffffff 0%, #d2a789 50%, #cc11d6 100%);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
 }
 
-.gradient-text2 {
-  color: aliceblue;
-}
-
-.about-top {
-  position: relative;
-  top: 30px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #dd6e12 0%, #764ba2 100%);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.app {
-  position: relative;
-  top: 30px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #dd6e12 0%, #764ba2 100%);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.ecosystem {
-  text-align: center;
-  padding: 4rem 2rem;
-}
-
-.ecosystem h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.ecosystem p {
+.subtitle {
   font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 3rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
 }
 
+/* Butonlar */
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+
+.btn-primary {
+  padding: 14px 32px;
+  border-radius: 50px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+}
+
+.btn-secondary {
+  padding: 14px 32px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- ORTAK SECTION STİLLERİ --- */
+section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h1 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  color: var(--text-muted);
+}
+
+/* --- KARTLAR (GLASSMORPHISM) --- */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
-  justify-items: center;
 }
 
 .card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  max-width: 320px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  transition: 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
 }
 
 .icon {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
   width: 60px;
   height: 60px;
-  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  border-radius: 12px;
+}
+
+.card h2 {
   color: #fff;
   margin-bottom: 1rem;
 }
 
-.card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
 .card p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 1rem;
-}
-
-.card ul {
-  list-style: none;
-  padding: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .card ul li {
-  font-size: 0.95rem;
-  color: #333;
-  margin: 0.5rem 0;
-  position: relative;
-  padding-left: 1.2rem;
+  color: var(--text-main);
+  margin: 0.8rem 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .card ul li::before {
-  content: "•";
-  color: #7c3aed;
-  /* mor nokta */
-  position: absolute;
-  left: 0;
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
 }
 
-.Memembers {
-  padding: 4rem 2rem;
-  text-align: center;
-  background: #f8f8f8;
-}
-
-.Memembers h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.Memembers p {
-  font-size: 1.2rem;
-  color: #555;
-  margin-bottom: 3rem;
-}
-
-
-
-
-
-
-
-/* Projeler container */
+/* --- PROJELER --- */
 .projects-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
 
-/* Proje kartları */
 .project-card {
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: 0.4s;
   display: flex;
   flex-direction: column;
 }
 
 .project-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary);
 }
 
-/* Proje resimleri */
 .project-image {
-  height: 200px;
+  height: 220px;
   overflow: hidden;
 }
 
@@ -212,227 +356,550 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: 0.5s;
 }
 
 .project-card:hover .project-image img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-/* Proje içeriği */
 .project-content {
-  padding: 25px;
+  padding: 1.5rem;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+}
+
+.role-badge {
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .project-content h3 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 15px;
-  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
 }
 
-.project-content p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  flex-grow: 1;
-}
-
-/* Proje butonları */
 .project-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   margin-top: auto;
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
 }
 
-.btn-demo,
-.btn-code {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
+.btn-sm-primary,
+.btn-sm-secondary {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
+  transition: 0.3s;
 }
 
-.btn-demo {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.btn-sm-primary {
+  background: var(--secondary);
   color: white;
+  border: none;
 }
 
-.btn-demo:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+.btn-sm-primary:hover {
+  background: #4f46e5;
 }
 
-.btn-code {
+.btn-sm-secondary {
   background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
+  border: 1px solid var(--border);
+  color: #fff;
 }
 
-.btn-code:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+.btn-sm-secondary:hover {
+  border-color: #fff;
 }
-
-/* Responsive tasarım */
-@media (max-width: 768px) {
-  .projects-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .project-card {
-    margin: 0 10px;
-  }
-
-  .project-buttons {
-    flex-direction: row;
-    gap: 15px;
-  }
-
-  .btn-demo,
-  .btn-code {
-    flex: 1;
-  }
-}
-
 
 .all-members {
-  position: relative;
-  top: 25px;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
+  display: block;
+  margin: 40px auto 0;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 12px 30px;
+  border-radius: 50px;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  background: #667eea;
-  color: white;
-  border: 2px solid #363943;
+  transition: 0.3s;
 }
 
-
-.app-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
+.all-members:hover {
+  background: var(--primary);
   color: #fff;
-  padding: 60px;
-  border-radius: 20px;
+}
+
+/* --- APP SECTION --- */
+.app-section {
+  padding: 4rem 2rem;
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 40px;
 }
 
-.app-content {
-  flex: 1;
+.app-label {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #fff;
 }
 
 .app-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+  font-size: 2rem;
+  margin: 15px 0;
+  color: #fff;
 }
 
 .app-content p {
-  font-size: 1.1rem;
+  color: var(--text-muted);
   margin-bottom: 25px;
 }
 
-.app-label {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 6px 12px;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  margin-bottom: 15px;
-}
-
 .app-features {
+  display: flex;
+  gap: 20px;
   list-style: none;
-  padding: 0;
-  margin: 0 0 25px 0;
+  margin-bottom: 30px;
 }
 
 .app-features li {
-  margin-bottom: 15px;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .download-buttons {
   display: flex;
   gap: 15px;
-  margin-bottom: 15px;
 }
 
-.download-buttons button {
-  padding: 12px 20px;
-  border: none;
+.store-btn {
+  padding: 12px 25px;
   border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  border: none;
+  font-weight: 600;
+  background: #fff;
+  color: #000;
+  transition: 0.3s;
 }
 
-.download-buttons button:hover {
+.store-btn:hover {
   transform: scale(1.05);
 }
 
-.appstore {
-  background: #000;
-  color: #fff;
-}
-
-.googleplay {
-  background: #34a853;
-  color: #fff;
-}
-
-.requirement {
-  font-size: 0.85rem;
-  opacity: 0.9;
-}
-
-.app-qr {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
 .qr-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 300px;
-}
-
-.qr-icon {
-  height: 10px;
-  width: 50px;
-  margin-bottom: 10px;
-}
-
-.qr-placeholder {
-  width: 120px;
-  height: 120px;
   background: #fff;
-  margin: 15px auto 0;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  color: #000;
 }
 
 .qr-image {
   width: 120px;
   height: 120px;
-  margin-top: 15px;
-  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* MOBİL UYUMLULUK */
+@media (max-width: 768px) {
+  .glass-panel {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .app-features {
+    flex-direction: column;
+  }
+
+  .download-buttons {
+    justify-content: center;
+  }
+
+  .gradient-text {
+    font-size: 2.5rem;
+  }
+}
+
+/* =========================================
+   AŞAĞIDAKİ KODLARI styles.css EN ALTINA EKLE
+   ========================================= */
+
+/* --- INTRO ANİMASYONU STİLLERİ --- */
+
+/* 1. Giriş Katmanı (Tüm ekranı kaplar) */
+#intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-dark);
+  /* Arka plan rengi */
+  z-index: 9999;
+  /* En üstte durur */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 6. saniyede bu katman görünmez olur */
+  animation: overlayFadeOut 0.5s ease-in-out 6s forwards;
+}
+
+.intro-content {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. Daire Çizimi (SVG) */
+.intro-circle-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+  /* Çizim tepeden başlasın */
+}
+
+.circle-path {
+  stroke-dasharray: 880;
+  /* Daire çevresi */
+  stroke-dashoffset: 880;
+  /* Başlangıçta çizgi yok */
+  /* 2. saniyede çizmeye başla */
+  animation: drawCircle 1.5s ease-in-out 2s forwards,
+    circleFadeOut 0.5s ease-in-out 5.5s forwards;
+}
+
+/* 3. Ortadaki Logo */
+.intro-logo {
+  position: absolute;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  opacity: 0;
+  /* Başlangıçta görünmez */
+  /* 3.5. saniyede logo belirir */
+  animation: logoFadeIn 1s ease-in-out 3.5s forwards,
+    logoFadeOut 0.5s ease-in-out 5.5s forwards;
+  text-shadow: 0 0 20px var(--primary);
+  z-index: 2;
+}
+
+/* 4. Ejderha Hareketi */
+.dragon-container {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  top: 50%;
+  left: 50%;
+  /* Başlangıçta ekranın sağ dışında */
+  transform: translate(100vw, -50%);
+
+  /* Animasyon Sırası: Gel -> Süzül -> Git */
+  animation: dragonEnter 2s ease-out forwards,
+    dragonFloat 1.5s ease-in-out 2s infinite alternate,
+    dragonExit 1.5s ease-in 4.5s forwards;
+  z-index: 3;
+}
+
+#dragon-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 15px var(--secondary));
+  /* Ejderha parlaması */
+}
+
+
+/* --- KEYFRAMES (Hareket Tanımları) --- */
+/* Bu kısım olmazsa hiçbir şey hareket etmez! */
+
+@keyframes dragonEnter {
+  0% {
+    transform: translate(100vw, -50%) scale(0.5);
+    opacity: 0;
+  }
+
+  60% {
+    transform: translate(-60%, -50%) scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes dragonFloat {
+  0% {
+    margin-top: 0px;
+  }
+
+  100% {
+    margin-top: -20px;
+  }
+}
+
+@keyframes dragonExit {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-150vw, -150%) scale(0.2);
+    opacity: 0;
+  }
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes logoFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes circleFadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes logoFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes overlayFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* =========================================
+   GÜNCELLENMİŞ INTRO ANİMASYONU (STYLES.CSS EN ALTA EKLE)
+   ========================================= */
+
+/* 1. Giriş Katmanı */
+#intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-dark);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 6. saniyede ekran kararır */
+  animation: overlayFadeOut 0.5s ease-in-out 6s forwards;
+}
+
+.intro-content {
+  position: relative;
+  width: 100%;
+  /* Alanı genişlettik */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. Daire Çizimi */
+.intro-circle-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  /* Tam merkeze oturt */
+  z-index: 1;
+  overflow: visible;
+  /* Taşmaları gizleme */
+}
+
+.circle-path {
+  stroke-dasharray: 880;
+  stroke-dashoffset: 880;
+  animation: drawCircle 1.5s ease-in-out 2s forwards,
+    circleFadeOut 0.5s ease-in-out 5.5s forwards;
+}
+
+/* 3. Ortadaki "YGT" Yazısı (Logo gelince bu da olacak mı? İstersen kaldırabilirsin) */
+.intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  opacity: 0;
+  animation: textFadeIn 1s ease-in-out 3.5s forwards,
+    textFadeOut 0.5s ease-in-out 5.5s forwards;
+  text-shadow: 0 0 20px var(--primary);
+  z-index: 4;
+  /* Logonun üstünde çıksın */
+}
+
+/* 4. LOGO VE HAREKETİ (Burayı düzelttik) */
+.dragon-container {
+  position: absolute;
+  /* Boyutu buradan büyütüyoruz (Eskisi 120px idi) */
+  width: 280px;
+  height: 280px;
+  top: 50%;
+  left: 50%;
+  /* Başlangıç konumu: Ekranın sağ dışı */
+  transform: translate(100vw, -50%);
+
+  /* Animasyon Zinciri */
+  animation: dragonEnter 2s ease-out forwards,
+    dragonFloat 1.5s ease-in-out 2s infinite alternate,
+    dragonExit 1.5s ease-in 4.5s forwards;
+  z-index: 3;
+
+  /* Resmi ortalamak için */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo Resminin Kendisi */
+.dragon-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Resmi kutuya sığdır */
+
+  /* Eğer arka planı temizleyemediysen bu kod resmi yuvarlak keser: */
+  border-radius: 50%;
+
+  /* Parlama Efekti */
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+}
+
+
+/* --- KEYFRAMES (HAREKET AYARLARI) --- */
+
+@keyframes dragonEnter {
+  0% {
+    transform: translate(100vw, -50%) scale(0.5);
+    opacity: 0;
+  }
+
+  60% {
+    transform: translate(-60%, -50%) scale(1.1);
+    opacity: 1;
+  }
+
+  /* Biraz sola geç */
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Merkeze otur */
+}
+
+@keyframes dragonFloat {
+  0% {
+    margin-top: 0px;
+  }
+
+  100% {
+    margin-top: -15px;
+  }
+
+  /* Hafif yukarı aşağı süzülme */
+}
+
+@keyframes dragonExit {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-150vw, -50%) scale(0.2);
+    opacity: 0;
+  }
+
+  /* Sola uçup git */
+}
+
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes circleFadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes textFadeOut {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes overlayFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
