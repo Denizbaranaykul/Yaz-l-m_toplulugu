@@ -50,13 +50,8 @@ header.scrolled {
 
 .Logo_main {
   display: flex;
-  /* Resim ve yazıyı yan yana dizer */
   align-items: center;
-  /* Dikey olarak birbirlerine ortalar */
   gap: 12px;
-  /* Logo ile yazı arasına 12px boşluk koyar */
-
-  /* Yazı font ayarları */
   font-size: 1.5rem;
   font-weight: 700;
   color: #fff;
@@ -64,14 +59,10 @@ header.scrolled {
   letter-spacing: 1px;
 }
 
-/* Navbar'daki logo resminin boyut ayarı */
 .nav-logo {
   height: 40px;
-  /* Navbar'a sığacak ideal yükseklik */
   width: auto;
-  /* Genişlik otomatik ayarlansın (resim bozulmaz) */
   object-fit: contain;
-  /* Resim kutuya tam oturur */
 }
 
 .navbar {
@@ -80,14 +71,6 @@ header.scrolled {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-.Logo_main {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  text-decoration: none;
-  letter-spacing: 1px;
 }
 
 .liste {
@@ -117,12 +100,9 @@ header.scrolled {
   width: 100%;
   height: 100%;
   z-index: 1;
-  /* Arka planın üstünde, yazının altında */
   opacity: 0.25;
-  /* Çok parlak olmasın, arka planda hafifçe aksın */
 
   /* SİHİRLİ DOKUNUŞ: Maskeleme */
-  /* Sol ve Sağ kenarlarda %100 görünür (siyah), ortada şeffaf */
   mask-image: linear-gradient(90deg,
       rgba(0, 0, 0, 1) 0%,
       rgba(0, 0, 0, 1) 15%,
@@ -325,12 +305,10 @@ section {
   border-radius: 50%;
 }
 
-/* --- PROJELER --- */
-.projects-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-}
+/* --- PROJELER (Yönetim Kurulu Kartları) --- */
+
+/* Not: Carousel yapısı kullanıldığı için buradaki eski grid tanımı gereksizdir. */
+/* .projects-container yerine .carousel-wrapper'a odaklanacağız. */
 
 .project-card {
   background: var(--bg-card);
@@ -340,6 +318,11 @@ section {
   transition: 0.4s;
   display: flex;
   flex-direction: column;
+
+  /* Carousel için gerekli stil (JS'teki cardWidth = 320px baz alınmıştır) */
+  flex-shrink: 0;
+  width: 300px;
+  margin-right: 20px;
 }
 
 .project-card:hover {
@@ -545,7 +528,7 @@ section {
 }
 
 /* =========================================
-   AŞAĞIDAKİ KODLARI styles.css EN ALTINA EKLE
+   AŞAĞIDAKİ KODLAR CAROUSEL VE INTRO İÇİN
    ========================================= */
 
 /* --- INTRO ANİMASYONU STİLLERİ --- */
@@ -558,187 +541,16 @@ section {
   width: 100%;
   height: 100vh;
   background-color: var(--bg-dark);
-  /* Arka plan rengi */
-  z-index: 9999;
-  /* En üstte durur */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* 6. saniyede bu katman görünmez olur */
-  animation: overlayFadeOut 0.5s ease-in-out 6s forwards;
-}
-
-.intro-content {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* 2. Daire Çizimi (SVG) */
-.intro-circle-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: rotate(-90deg);
-  /* Çizim tepeden başlasın */
-}
-
-.circle-path {
-  stroke-dasharray: 880;
-  /* Daire çevresi */
-  stroke-dashoffset: 880;
-  /* Başlangıçta çizgi yok */
-  /* 2. saniyede çizmeye başla */
-  animation: drawCircle 1.5s ease-in-out 2s forwards,
-    circleFadeOut 0.5s ease-in-out 5.5s forwards;
-}
-
-/* 3. Ortadaki Logo */
-.intro-logo {
-  position: absolute;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  opacity: 0;
-  /* Başlangıçta görünmez */
-  /* 3.5. saniyede logo belirir */
-  animation: logoFadeIn 1s ease-in-out 3.5s forwards,
-    logoFadeOut 0.5s ease-in-out 5.5s forwards;
-  text-shadow: 0 0 20px var(--primary);
-  z-index: 2;
-}
-
-/* 4. Ejderha Hareketi */
-.dragon-container {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  top: 50%;
-  left: 50%;
-  /* Başlangıçta ekranın sağ dışında */
-  transform: translate(100vw, -50%);
-
-  /* Animasyon Sırası: Gel -> Süzül -> Git */
-  animation: dragonEnter 2s ease-out forwards,
-    dragonFloat 1.5s ease-in-out 2s infinite alternate,
-    dragonExit 1.5s ease-in 4.5s forwards;
-  z-index: 3;
-}
-
-#dragon-svg {
-  width: 100%;
-  height: 100%;
-  filter: drop-shadow(0 0 15px var(--secondary));
-  /* Ejderha parlaması */
-}
-
-
-/* --- KEYFRAMES (Hareket Tanımları) --- */
-/* Bu kısım olmazsa hiçbir şey hareket etmez! */
-
-@keyframes dragonEnter {
-  0% {
-    transform: translate(100vw, -50%) scale(0.5);
-    opacity: 0;
-  }
-
-  60% {
-    transform: translate(-60%, -50%) scale(1.1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-@keyframes dragonFloat {
-  0% {
-    margin-top: 0px;
-  }
-
-  100% {
-    margin-top: -20px;
-  }
-}
-
-@keyframes dragonExit {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translate(-150vw, -150%) scale(0.2);
-    opacity: 0;
-  }
-}
-
-@keyframes drawCircle {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes logoFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes circleFadeOut {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes logoFadeOut {
-  to {
-    opacity: 0;
-    transform: scale(1.2);
-  }
-}
-
-@keyframes overlayFadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-/* =========================================
-   GÜNCELLENMİŞ INTRO ANİMASYONU (STYLES.CSS EN ALTA EKLE)
-   ========================================= */
-
-/* 1. Giriş Katmanı */
-#intro-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: var(--bg-dark);
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* 6. saniyede ekran kararır */
-  animation: overlayFadeOut 0.5s ease-in-out 6s forwards;
+  animation: overlayFadeOut 0.5s ease-in-out 3.37s forwards;
 }
 
 .intro-content {
   position: relative;
   width: 100%;
-  /* Alanı genişlettik */
   height: 100%;
   display: flex;
   justify-content: center;
@@ -751,20 +563,18 @@ section {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-90deg);
-  /* Tam merkeze oturt */
   z-index: 1;
   overflow: visible;
-  /* Taşmaları gizleme */
 }
 
 .circle-path {
   stroke-dasharray: 880;
   stroke-dashoffset: 880;
-  animation: drawCircle 1.5s ease-in-out 2s forwards,
-    circleFadeOut 0.5s ease-in-out 5.5s forwards;
+  animation: drawCircle 0.5s ease-in-out 2s forwards,
+    circleFadeOut 0.5s ease-in-out 2.5s forwards;
 }
 
-/* 3. Ortadaki "YGT" Yazısı (Logo gelince bu da olacak mı? İstersen kaldırabilirsin) */
+/* 3. Ortadaki "YGT" Yazısı (İsteğe bağlı, Logo gelince bu da olacak mı?) */
 .intro-logo {
   position: absolute;
   top: 50%;
@@ -778,49 +588,37 @@ section {
     textFadeOut 0.5s ease-in-out 5.5s forwards;
   text-shadow: 0 0 20px var(--primary);
   z-index: 4;
-  /* Logonun üstünde çıksın */
 }
 
-/* 4. LOGO VE HAREKETİ (Burayı düzelttik) */
+/* 4. LOGO VE HAREKETİ */
 .dragon-container {
   position: absolute;
-  /* Boyutu buradan büyütüyoruz (Eskisi 120px idi) */
   width: 280px;
   height: 280px;
   top: 50%;
   left: 50%;
-  /* Başlangıç konumu: Ekranın sağ dışı */
   transform: translate(100vw, -50%);
 
   /* Animasyon Zinciri */
   animation: dragonEnter 2s ease-out forwards,
     dragonFloat 1.5s ease-in-out 2s infinite alternate,
-    dragonExit 1.5s ease-in 4.5s forwards;
+    dragonExit 1.5s ease-in 2.5s forwards;
   z-index: 3;
 
-  /* Resmi ortalamak için */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Logo Resminin Kendisi */
 .dragon-container img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Resmi kutuya sığdır */
-
-  /* Eğer arka planı temizleyemediysen bu kod resmi yuvarlak keser: */
   border-radius: 50%;
-
-  /* Parlama Efekti */
   filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
 }
 
-
 /* --- KEYFRAMES (HAREKET AYARLARI) --- */
-
 @keyframes dragonEnter {
   0% {
     transform: translate(100vw, -50%) scale(0.5);
@@ -832,12 +630,9 @@ section {
     opacity: 1;
   }
 
-  /* Biraz sola geç */
   100% {
     transform: translate(-50%, -50%) scale(1);
   }
-
-  /* Merkeze otur */
 }
 
 @keyframes dragonFloat {
@@ -848,8 +643,6 @@ section {
   100% {
     margin-top: -15px;
   }
-
-  /* Hafif yukarı aşağı süzülme */
 }
 
 @keyframes dragonExit {
@@ -862,8 +655,6 @@ section {
     transform: translate(-150vw, -50%) scale(0.2);
     opacity: 0;
   }
-
-  /* Sola uçup git */
 }
 
 @keyframes drawCircle {
@@ -902,4 +693,80 @@ section {
     opacity: 0;
     visibility: hidden;
   }
+}
+
+/* ========================================= */
+/* CAROUSEL VE OK STİLLERİ (YÖNETİM KURULU) */
+/* ========================================= */
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Kaydırılabilir İçerik Alanı */
+.projects-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  /* Yatay kaydırmayı aktif et */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  margin: 0;
+
+  /* KAYDIRMA ÇUBUĞUNU GİZLEME */
+  -ms-overflow-style: none;
+  /* Internet Explorer ve Edge için */
+  scrollbar-width: none;
+  /* Firefox için */
+}
+
+/* WebKit tabanlı tarayıcılar (Chrome, Safari, Edge) için gizleme */
+.projects-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ok Butonları */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.nav-arrow:hover {
+  background: var(--primary);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.left-arrow {
+  left: 0;
+}
+
+.right-arrow {
+  right: 0;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-50%) scale(1);
+  box-shadow: none;
 }

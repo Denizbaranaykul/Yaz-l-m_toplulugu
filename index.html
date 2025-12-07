@@ -37,11 +37,14 @@
           <h3>Hakkımızda</h3>
         </a>
         <a href="#projects">
-          <h3>Projeler</h3>
+          <h3>Yöneticiler</h3>
         </a>
+
+
         <a href="#contact">
           <h3>İletişim</h3>
         </a>
+
       </ul>
     </nav>
   </header>
@@ -55,8 +58,13 @@
         <h2 class="subtitle">Öğrenen ve üreten bir geliştirici topluluğu. Birlikte kod yazıyor, projeler
           geliştiriyor ve bilgi paylaşıyoruz.</h2>
         <div class="buttons">
-          <button class="btn-primary" onclick="window.location.href='basvuru.html'">Aramıza Katıl</button>
-          <button class="btn-secondary">Uygulamayı İndir</button>
+          <button class="btn-primary" onclick="window.location.href='basvuru.html'">Yönetime Katıl</button>
+          <button class="btn-secondary"
+            onclick="window.open('https://chat.whatsapp.com/Bu3QmS4q2uq4kAbrZfaFPp?mode=hqrt1')">Whatsap Grubuna
+            Katıl</button>
+          <button class="btn-primary"
+            onclick="window.open('https://app.pusula.pau.edu.tr/sks/Topluluk/ToplulukUyeBasvuru.aspx')">Topluluğa Üye Ol
+          </button>
         </div>
       </div>
       <div class="glow-effect"></div>
@@ -106,61 +114,143 @@
 
     <section class="Memembers" id="projects">
       <div class="section-header">
-        <h1>Tutkulu Geliştiricilerimiz</h1>
+        <h1>Topluluğumuzun Yönetim Kurulu</h1>
         <p>Farklı uzmanlık alanlarından deneyimli geliştiricilerle tanışın.</p>
       </div>
 
-      <div class="projects-container">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="scarface2.jpeg" alt="Ahmet Benli">
+      <div class="carousel-wrapper">
+        <button id="prevBtn" class="nav-arrow left-arrow">❮</button>
+
+        <div class="projects-container" id="projectsContainer">
+          <div class="project-card">
+            <div class="project-image">
+              <img src="scarface2.jpeg" alt="Ahmet Benli">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Backend Developer</div>
+              <h3>Ahmet Benli</h3>
+              <p>Backend sistemleri ve veritabanı uzmanı. Ölçeklenebilir mimari konularında deneyimli.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary" onclick="go_to_link('https://github.com/AHMETBNL')">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
+            </div>
           </div>
-          <div class="project-content">
-            <div class="role-badge">Backend Developer</div>
-            <h3>Ahmet Benli</h3>
-            <p>Backend sistemleri ve veritabanı uzmanı. Ölçeklenebilir mimari konularında deneyimli.</p>
-            <div class="project-buttons">
-              <button class="btn-sm-primary" onclick="go_to_link('https://github.com/AHMETBNL')">GitHub</button>
-              <button class="btn-sm-secondary">LinkedIn</button>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="nurse.jpeg" alt="Deniz Baran Aykul">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Başkan Yardımcısı</div>
+              <h3>Deniz Baran Aykul</h3>
+              <p>Web ve Mobil geliştirme uzmanı. Hem Android hem iOS'ta modern çözümler üretir.</p>
+              <div class="project-buttons">
+
+                <button class="btn-sm-secondary"
+                  onclick="go_to_link('https://www.linkedin.com/in/deniz-aykul-0195b919b/')">LinkedIn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="atakan.png" alt="Atakan Çelik">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Başkan</div>
+              <h3>Atakan Çelik</h3>
+              <p>UI/UX odaklı frontend uzmanı. Kullanıcı deneyimi ve erişilebilirlik mentoru.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="scarface.png" alt="Yeni Üye 1">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Data Scientist</div>
+              <h3>Canan Yılmaz</h3>
+              <p>Büyük veri analizi, makine öğrenimi ve yapay zeka uygulamaları geliştiricisi.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="placeholder2.png" alt="Yeni Üye 2">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Mobile Developer</div>
+              <h3>Emre Kılıç</h3>
+              <p>Native ve Cross-platform mobil uygulamalar geliştirme konusunda uzmandır.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="placeholder3.png" alt="Yeni Üye 3">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">DevOps Engineer</div>
+              <h3>Selin Demir</h3>
+              <p>CI/CD süreçleri, otomasyon ve bulut altyapıları yönetimi konularında deneyimli.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="placeholder4.png" alt="Yeni Üye 4">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Game Developer</div>
+              <h3>Murat Aslan</h3>
+              <p>Oyun motorları, fizik simülasyonları ve interaktif deneyimler geliştirir.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="placeholder5.png" alt="Yeni Üye 5">
+            </div>
+            <div class="project-content">
+              <div class="role-badge">Security Analyst</div>
+              <h3>Gizem Öztürk</h3>
+              <p>Web ve uygulama güvenliği, sızma testleri ve risk analizi uzmanıdır.</p>
+              <div class="project-buttons">
+                <button class="btn-sm-primary">GitHub</button>
+                <button class="btn-sm-secondary">LinkedIn</button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="project-card">
-          <div class="project-image">
-            <img src="pp.jpeg" alt="Deniz Baran Aykul">
-          </div>
-          <div class="project-content">
-            <div class="role-badge">Full Stack Developer</div>
-            <h3>Deniz Baran Aykul</h3>
-            <p>Web ve Mobil geliştirme uzmanı. Hem Android hem iOS'ta modern çözümler üretir.</p>
-            <div class="project-buttons">
-              <button class="btn-sm-primary"
-                onclick="go_to_link('https://denizbaranaykul.github.io/portfolyo/')">GitHub</button>
-              <button class="btn-sm-secondary"
-                onclick="go_to_link('https://www.linkedin.com/in/deniz-aykul-0195b919b/')">LinkedIn</button>
-            </div>
-          </div>
-        </div>
+        <button id="nextBtn" class="nav-arrow right-arrow">❯</button>
 
-        <div class="project-card">
-          <div class="project-image">
-            <img src="atakan.png" alt="Atakan Çelik">
-          </div>
-          <div class="project-content">
-            <div class="role-badge">Frontend Lead</div>
-            <h3>Atakan Çelik</h3>
-            <p>UI/UX odaklı frontend uzmanı. Kullanıcı deneyimi ve erişilebilirlik mentoru.</p>
-            <div class="project-buttons">
-              <button class="btn-sm-primary">GitHub</button>
-              <button class="btn-sm-secondary">LinkedIn</button>
-            </div>
-          </div>
-        </div>
+
       </div>
-      <button class="all-members">Tüm Üyeleri Gör</button>
-    </section>
 
+    </section>
+    <!--
     <section class="app-section" id="contact">
       <div class="app-container glass-panel">
         <div class="app-content">
@@ -187,8 +277,9 @@
         </div>
       </div>
     </section>
+  -->
   </main>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 
 </html>
