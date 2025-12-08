@@ -1,15 +1,74 @@
 // =========================================================
-// YAZILIM GELİŞTİRME TOPLULUĞU Coded By Deniz Baran Aykul
+// YAZILIM GELİŞTİRME TOPLULUĞU - ANA SCRIPT
 // =========================================================
 
-// --- Yardımcı Fonksiyonlar ---
-function go_to_link(link) {
+// --- 1. FIREBASE İÇE AKTARMA (MODÜL) ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// --- 2. FIREBASE AYARLARI ---
+const firebaseConfig = {
+    apiKey: "AIzaSyAPa4-8qVuExM5RP32JcnP2cq5L391uwfU",
+    authDomain: "yazilim-gelistirme-web-site.firebaseapp.com",
+    projectId: "yazilim-gelistirme-web-site",
+    storageBucket: "yazilim-gelistirme-web-site.firebasestorage.app",
+    messagingSenderId: "373546414576",
+    appId: "1:373546414576:web:6c4c92603dd184c8736d35"
+};
+
+// Firebase Başlat
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// --- 3. FOOTER İLETİŞİM FORMU İŞLEMLERİ ---
+const footerForm = document.getElementById('footerForm');
+
+if (footerForm) {
+    footerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('footerSubmitBtn');
+        const originalText = submitBtn.innerText;
+
+        // Butonu kilitle
+        submitBtn.innerText = "Gönderiliyor...";
+        submitBtn.disabled = true;
+
+        // Verileri al
+        const name = document.getElementById('footerName').value;
+        const msg = document.getElementById('footerMsg').value;
+
+        try {
+            // 'iletisim_mesajlari' koleksiyonuna ekle
+            await addDoc(collection(db, "iletisim_mesajlari"), {
+                adSoyad: name,
+                mesaj: msg,
+                tarih: new Date().toLocaleString()
+            });
+
+            alert("Mesajınız bize ulaştı. Teşekkürler!");
+            footerForm.reset();
+
+        } catch (error) {
+            console.error("Hata:", error);
+            alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+        } finally {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+
+// --- 4. GENEL SİTE FONKSİYONLARI ---
+
+// Helper: Link açma
+window.go_to_link = function (link) {
     window.open(link, "_blank");
 }
 
-// --- Header Scroll Efekti (Navbar'ın kararması) ---
+// Header Scroll Efekti
 const header = document.querySelector("header");
-
 if (header) {
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
@@ -20,7 +79,7 @@ if (header) {
     });
 }
 
-// --- Smooth Scroll (Yumuşak Kaydırma) ---
+// Smooth Scroll
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -31,15 +90,13 @@ function scrollToSection(sectionId) {
     }
 }
 
-// --- Navbar Linklerine Tıklama Olayı ---
+// Navbar Link Tıklama
 document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelectorAll('.liste a');
-
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
-            // Sadece sayfa içi linkler (# ile başlayanlar) için çalışsın
             const href = this.getAttribute('href');
-            if (href.includes('#') && !href.includes('.html')) {
+            if (href && href.includes('#') && !href.includes('.html')) {
                 e.preventDefault();
                 const targetId = href.substring(1);
                 scrollToSection(targetId);
@@ -48,12 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// --- INTRO ANİMASYONU YÖNETİMİ ---
+// Intro Animasyonu
 window.addEventListener('load', () => {
-    // Sayfa yüklenirken scroll'u kilitle
     document.body.style.overflow = 'hidden';
-
-    // 6 saniye sonra intro'yu kaldır ve scroll'u aç
     setTimeout(() => {
         const overlay = document.getElementById('intro-overlay');
         if (overlay) {
@@ -63,13 +117,10 @@ window.addEventListener('load', () => {
     }, 6000);
 });
 
-// =========================================================
-// Deniz Baran Aykul
-// =========================================================
 
+// --- 5. MATRIX EFEKTİ ---
 const canvas = document.getElementById('matrix-canvas');
 
-// Sadece canvas elementi varsa bu kodu çalıştır
 if (canvas) {
     const ctx = canvas.getContext('2d');
     const topElement = document.querySelector('.top');
@@ -78,17 +129,11 @@ if (canvas) {
     const fontSize = 14;
     let drops = [];
 
-    // Canvas boyutunu ve sütunları ayarlayan fonksiyon
     function resizeCanvas() {
         if (topElement) {
-            // Canvas genişliğini kapsayıcısına eşitle
             canvas.width = topElement.offsetWidth;
             canvas.height = topElement.offsetHeight;
-
-            // Sütun sayısını yeniden hesapla
             columns = canvas.width / fontSize;
-
-            // Damla dizisini sıfırla ve yeniden doldur
             drops = [];
             for (let i = 0; i < columns; i++) {
                 drops[i] = 1;
@@ -96,119 +141,74 @@ if (canvas) {
         }
     }
 
-    // Sayfa yüklendiğinde ve boyut değiştiğinde ayarla
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Matrix Karakterleri
     const chars = '01XY<>/*-+.GIT_CODE_{}[]';
     const charArray = chars.split('');
 
     function drawMatrix() {
-        // Hafif iz bırakmak için şeffaf siyah boya
         ctx.fillStyle = 'rgba(32, 32, 76, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Yazı Rengi (Neon Mavi)
-        ctx.fillStyle = '#08a0b4';
+        ctx.fillStyle = '#ffffffff';
         ctx.font = fontSize + 'px monospace';
 
         for (let i = 0; i < drops.length; i++) {
             const text = charArray[Math.floor(Math.random() * charArray.length)];
-
-            // Karakteri çiz
             ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-            // Ekranın altına geldiyse rastgele başa sar
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
-
-            // Aşağı indir
             drops[i]++;
         }
     }
-
-    // 50ms'de bir çizimi yenile
     setInterval(drawMatrix, 50);
 }
 
-
-
-
+// --- 6. CAROUSEL VE MOBİL MENÜ ---
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobil Hamburger Menü
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".liste");
 
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".liste a").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+    }
+
+    // Carousel
     const container = document.querySelector('.projects-container');
-
-
-
     if (container) {
-        // Eğer HTML'de buton yoksa, JS ile oluşturup ekleyelim (Otomatik çözüm)
         let prevBtn = document.querySelector('.left-arrow');
         let nextBtn = document.querySelector('.right-arrow');
 
         if (!prevBtn && !nextBtn) {
-            // Butonlar HTML'de yoksa, onları container'ın dışına ekleyelim
             const wrapper = document.createElement('div');
             wrapper.className = 'carousel-wrapper';
-
-            // Container'ı wrapper içine al (DOM manipülasyonu)
             container.parentNode.insertBefore(wrapper, container);
             wrapper.appendChild(container);
 
-            // Butonları oluştur
             prevBtn = document.createElement('button');
             prevBtn.className = 'nav-arrow left-arrow';
-            prevBtn.innerHTML = '&#8249;'; // Sol ok işareti
+            prevBtn.innerHTML = '&#8249;';
 
             nextBtn = document.createElement('button');
             nextBtn.className = 'nav-arrow right-arrow';
-            nextBtn.innerHTML = '&#8250;'; // Sağ ok işareti
+            nextBtn.innerHTML = '&#8250;';
 
             wrapper.appendChild(prevBtn);
             wrapper.appendChild(nextBtn);
         }
 
-        const cardWidth = 320; // Kart genişliği + margin
-
-        // Sağa kaydır
-        nextBtn.addEventListener('click', () => {
-            container.scrollLeft += cardWidth;
-        });
-
-        // Sola kaydır
-        prevBtn.addEventListener('click', () => {
-            container.scrollLeft -= cardWidth;
-        });
+        const cardWidth = 320;
+        if (nextBtn) nextBtn.addEventListener('click', () => container.scrollLeft += cardWidth);
+        if (prevBtn) prevBtn.addEventListener('click', () => container.scrollLeft -= cardWidth);
     }
 });
-// =========================================================
-// MOBİL MENÜ İŞLEMLERİ (script.js EN ALTINA EKLE)
-// =========================================================
-
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".liste");
-const navLinksMobile = document.querySelectorAll(".nav-link"); // HTML'de linklere class eklemiştik
-
-if (hamburger && navMenu) {
-    // 1. Hamburger butonuna tıklama
-    hamburger.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        navMenu.classList.toggle("active");
-    });
-
-    // 2. Linke tıklayınca menüyü kapat
-    // (Not: index.html'de liste içindeki <a> etiketlerine class="nav-link" eklemeyi unutma veya aşağıyı '.liste a' yap)
-    document.querySelectorAll(".liste a").forEach(n => n.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        navMenu.classList.remove("active");
-    }));
-
-    // 3. Menü dışına tıklayınca kapat (Opsiyonel Kullanıcı Deneyimi)
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target) && navMenu.classList.contains('active')) {
-            hamburger.classList.remove("active");
-            navMenu.classList.remove("active");
-        }
-    });
-}

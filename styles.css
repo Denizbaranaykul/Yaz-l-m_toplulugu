@@ -53,14 +53,14 @@ header.scrolled {
   align-items: center;
   gap: 12px;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 1700;
   color: #fff;
   text-decoration: none;
   letter-spacing: 1px;
 }
 
 .nav-logo {
-  height: 40px;
+  height: 90px;
   width: auto;
   object-fit: contain;
 }
@@ -92,7 +92,7 @@ header.scrolled {
   text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
-/* Matrix Canvas Ayarları */
+/* Matrix Canvas Ayarları - GÜNCELLENDİ */
 #matrix-canvas {
   position: absolute;
   top: 0;
@@ -100,29 +100,24 @@ header.scrolled {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.25;
+  /* Arka planda kalsın */
 
-  /* SİHİRLİ DOKUNUŞ: Maskeleme */
-  mask-image: linear-gradient(90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 15%,
-      rgba(0, 0, 0, 0) 30%,
-      rgba(0, 0, 0, 0) 70%,
-      rgba(0, 0, 0, 1) 85%,
-      rgba(0, 0, 0, 1) 100%);
-  -webkit-mask-image: linear-gradient(90deg,
-      rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 1) 15%,
-      rgba(0, 0, 0, 0) 30%,
-      rgba(0, 0, 0, 0) 70%,
-      rgba(0, 0, 0, 1) 85%,
-      rgba(0, 0, 0, 1) 100%);
+  /* Yazıların arkasında da aksın diye opacity'i biraz düşürdük */
+  /* Böylece üstteki yazılar daha rahat okunur */
+  opacity: 0.15;
+
+  pointer-events: none;
+  /* Tıklamaları engellemesin */
+
+  /* NOT: Maskeleme (mask-image) kodlarını buradan SİLDİK. 
+       Artık ekranın her yerinden akacak. */
 }
 
-/* Yazıların Canvas'ın üstünde kalması için z-index artırıyoruz */
+/* Yazıların Canvas'ın üstünde kalması için z-index ayarı */
 .hero-content {
   position: relative;
   z-index: 10;
+  /* Canvas (1) olduğu için bu 10 olunca üstte durur */
 }
 
 /* --- HERO SECTION --- */
@@ -925,5 +920,265 @@ section {
   .intro-circle-svg {
     transform: translate(-50%, -50%) scale(0.7) rotate(-90deg);
     /* Daireyi küçült */
+  }
+}
+
+/* =========================================
+   FOOTER (İLETİŞİM) STİLLERİ
+   ========================================= */
+
+.site-footer {
+  background: rgba(2, 6, 23, 0.95);
+  /* Çok koyu zemin */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem 2rem 1rem;
+  margin-top: 4rem;
+  position: relative;
+  z-index: 100;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Footer Sol Kısım (Logo) */
+.footer-logo h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+.footer-logo p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Sosyal Medya Alanı */
+.social-section {
+  text-align: right;
+}
+
+.social-section h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+/* Sosyal Medya Butonları */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: #fff;
+  transition: 0.3s all ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* SVG İkon Boyutu */
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  /* Mevcut yazı rengini al */
+}
+
+/* HOVER EFEKTLERİ (Marka Renkleri) */
+
+/* LinkedIn: Mavi */
+.social-btn.linkedin:hover {
+  background: #0077b5;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 119, 181, 0.6);
+  transform: translateY(-3px);
+  border-color: #0077b5;
+}
+
+/* Instagram: Gradient */
+.social-btn.instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: white;
+  box-shadow: 0 0 20px rgba(214, 41, 118, 0.6);
+  transform: translateY(-3px);
+  border-color: transparent;
+}
+
+/* YouTube: Kırmızı */
+.social-btn.youtube:hover {
+  background: #ff0000;
+  color: white;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+  transform: translateY(-3px);
+  border-color: #ff0000;
+}
+
+/* Footer En Alt (Telif Hakkı) */
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.85rem;
+}
+
+/* MOBİL GÖRÜNÜM */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .social-section {
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* --- FOOTER FORM STİLLERİ --- */
+
+/* Form Konumlandırma */
+.footer-contact-form {
+  flex: 1;
+  /* Ortadaki alanın genişlemesini sağlar */
+  max-width: 400px;
+  margin: 0 20px;
+  text-align: left;
+}
+
+.footer-contact-form h3 {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+/* Input ve Textarea Tasarımı */
+#footerForm input,
+#footerForm textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-family: 'Outfit', sans-serif;
+  outline: none;
+  transition: 0.3s;
+}
+
+#footerForm textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+#footerForm input:focus,
+#footerForm textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(8, 160, 180, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Gönder Butonu */
+#footerSubmitBtn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  float: right;
+}
+
+#footerSubmitBtn:hover {
+  background: var(--accent);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.5);
+}
+
+/* Mobil Uyum */
+@media (max-width: 768px) {
+  .footer-contact-form {
+    max-width: 100%;
+    margin: 20px 0;
+    /* Mobilde alt alta gelsin */
+    order: 2;
+    /* Logodan sonra gelsin */
+  }
+
+  .social-section {
+    order: 3;
+  }
+}
+
+/* --- LOGO YAZISI DÜZENLEMESİ --- */
+
+/* Yazıları kapsayan kutu */
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+  /* Yazıları alt alta dizer */
+  justify-content: center;
+  line-height: 1.1;
+  /* Satır aralığını biraz sıkılaştırır */
+}
+
+/* Üstteki Yazı (Yazılım Geliştirme) */
+.txt-upper {
+  font-size: 1.4rem;
+  /* Mobilde taşmaması için ideal boyut */
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+/* Alttaki Yazı (Topluluğu) */
+.txt-lower {
+  font-size: 1.5rem;
+  /* Alt satır biraz daha küçük olsun */
+  font-weight: 400;
+  /* Biraz daha ince dursun */
+  color: var(--primary);
+  /* Neon mavi renk (isteğe bağlı) */
+  /* Beyaz kalmasını istersen üstteki color satırını sil */
+  letter-spacing: 2px;
+  /* Harf aralarını açarak şık durmasını sağlar */
+  text-transform: uppercase;
+}
+
+/* Mobilde yazıların çok büyük kalmaması için ayar */
+@media (max-width: 768px) {
+  .txt-upper {
+    font-size: 0.9rem;
+  }
+
+  .txt-lower {
+    font-size: 0.75rem;
+  }
+
+  .nav-logo {
+    height: 35px;
+    /* Mobilde logoyu biraz küçültelim */
   }
 }
