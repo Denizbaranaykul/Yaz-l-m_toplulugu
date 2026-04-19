@@ -34,7 +34,6 @@
     font-size: 2rem;
     margin-bottom: 10px;
     background: linear-gradient(to right, #3b82f6, #8b5cf6);
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -119,7 +118,8 @@
     transform: none;
 }
 
-#loginForm, #registerForm {
+#loginForm,
+#registerForm {
     width: 100%;
 }
 
