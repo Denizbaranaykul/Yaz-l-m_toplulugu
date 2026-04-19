@@ -183,7 +183,7 @@ async function loadSubmissions() {
                         message: `Merhaba ${data.adSoyad}, '${data.odevKodu}' başlıklı ödevin puanlandı. Puanın: ${puan}. Not: ${feedback}`,
                         user_name: data.adSoyad,
                         email: data.userEmail || "daykul75@gmail.com",
-                        link: window.location.origin + "/egitim.html"
+                        link: window.location.origin
                     });
                 } catch (emailError) {
                     console.error("EmailJS Hatası:", emailError);
@@ -328,7 +328,7 @@ window.replyToStudent = async (subId) => {
                 message: `Eğitmen ödevinle ilgili mesajına cevap verdi: ${msg}`,
                 user_name: subData.adSoyad,
                 email: subData.userEmail || "daykul75@gmail.com",
-                link: window.location.origin + "/egitim.html"
+                link: window.location.origin
             });
         } catch (emailError) {
             console.error("EmailJS Hatası:", emailError);

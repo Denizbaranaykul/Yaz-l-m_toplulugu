@@ -274,7 +274,7 @@ async function loadPastSubmissions() {
                         message: `${currentUserData.adSoyad} isimli öğrenci ödevi için mesaj gönderdi: ${msg}`,
                         user_name: "YGT Admin",
                         email: "daykul75@gmail.com",
-                        link: window.location.origin + "/admin.html"
+                        link: window.location.origin
                     });
                 } catch (emailError) {
                     console.error("EmailJS Bildirim Hatası:", emailError);
@@ -342,7 +342,7 @@ submitOdevBtn.addEventListener('click', async () => {
                 message: `${currentUserData.adSoyad} isimli öğrenci '${title}' başlıklı ödevini teslim etti.`,
                 user_name: "YGT Admin",
                 email: "daykul75@gmail.com",
-                link: window.location.origin + "/admin.html"
+                link: window.location.origin
             });
         } catch (emailError) {
             console.error("EmailJS Bildirim Hatası:", emailError);
