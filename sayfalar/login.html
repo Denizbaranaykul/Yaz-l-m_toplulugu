@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <link rel="icon" type="image/png" href="../foto/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - YGT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stiller/styles.css">
+    <link rel="stylesheet" href="../stiller/auth.css">
+</head>
+
+<body>
+    <div class="auth-container">
+        <canvas id="matrix-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.3;"></canvas>
+        
+        <a href="../index.html" class="back-to-home">
+            <span>←</span> Ana Sayfaya Dön
+        </a>
+
+        <div class="auth-card glass-panel">
+            <div class="auth-header">
+                <img src="../foto/logo.png" alt="YGT Logo">
+                <h1>Eğitim Portalı</h1>
+            </div>
+
+            <div class="auth-tabs">
+                <div class="auth-tab active" id="loginTab">Giriş Yap</div>
+                <div class="auth-tab" id="registerTab">Kayıt Ol</div>
+            </div>
+
+            <!-- Giriş Formu -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">E-posta</label>
+                    <input type="email" id="loginEmail" placeholder="ornek@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Şifre</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="auth-btn" id="loginBtn">Giriş Yap</button>
+            </form>
+
+            <!-- Kayıt Formu -->
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regName">Ad Soyad</label>
+                    <input type="text" id="regName" placeholder="Adınız Soyadınız" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">E-posta</label>
+                    <input type="email" id="regEmail" placeholder="ornek@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Şifre</label>
+                    <input type="password" id="regPassword" placeholder="En az 6 karakter" required minlength="6">
+                </div>
+                <button type="submit" class="auth-btn" id="registerBtn">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="../js/login.js"></script>
+    <script type="module">
+        // Matrix Efekti (index.html'den uyarlandı)
+        const canvas = document.getElementById('matrix-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let columns = 0;
+            const fontSize = 14;
+            let drops = [];
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                columns = canvas.width / fontSize;
+                drops = [];
+                for (let i = 0; i < columns; i++) {
+                    drops[i] = 1;
+                }
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const chars = '01XY<>/*-+.GIT_CODE_{}[]';
+            const charArray = chars.split('');
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            setInterval(drawMatrix, 50);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <link rel="icon" type="image/png" href="../foto/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eğitim Portalı - YGT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stiller/styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("_Cw6kyPWX_IFJmlvv");
+        })();
+    </script>
+    <link rel="stylesheet" href="../stiller/egitim.css">
+</head>
+
+<body style="overflow-x: hidden;">
+    <header class="head scrolled">
+        <nav class="navbar">
+            <a href="../index.html" class="Logo_main">
+                <img src="../foto/logo.png" alt="Logo" class="nav-logo">
+                <div class="logo-text-group">
+                    <span class="txt-upper">Yazılım Geliştirme</span>
+                    <span class="txt-lower">Topluluğu</span>
+                </div>
+            </a>
+            <div class="user-actions">
+                <button class="logout-btn" id="logoutBtn">Çıkış Yap</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="main-content">
+            <div class="user-welcome glass-panel">
+                <div class="user-info">
+                    <h2 id="welcomeName">Yükleniyor...</h2>
+                    <p id="userEmail">Lütfen bekleyin...</p>
+                    <a href="admin.html" class="admin-link" id="adminLink" style="margin-top: 10px;">Admin Paneline Git</a>
+                </div>
+                <div class="user-score-badge">
+                    <span class="score" style="font-size: 1.2rem; padding: 10px 20px;" id="myScore">0 Puan</span>
+                </div>
+            </div>
+
+            <!-- Liderlik Tablosu Buraya Taşındı -->
+            <div class="content-card glass-panel">
+                <h3><span>🏆</span> Liderlik Tablosu (Top 10)</h3>
+                <ul class="leaderboard-list" id="leaderboardContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <!-- Dinamik olarak dolacak -->
+                    <li style="text-align: center; padding: 20px; color: #94a3b8;">Yükleniyor...</li>
+                </ul>
+            </div>
+
+            <div class="content-card glass-panel" id="questionsCard">
+                <h3><span></span> Günün Soruları</h3>
+                <div id="questionsContainer">
+                    <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz soru eklenmemiş.</p>
+                </div>
+            </div>
+
+            <div class="content-card glass-panel" id="assignmentsCard">
+                <h3><span></span> Aktif Ödevler</h3>
+                <div id="assignmentsContainer">
+                    <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz aktif ödev yayınlanmamış.</p>
+                </div>
+            </div>
+
+            <div class="content-card glass-panel">
+                <h3><span>🚀</span> Ödev Gönder</h3>
+                <div class="submission-area">
+                    <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;">Yazdığın kodu veya ödev metnini buraya yapıştırabilirsin.</p>
+                    <select id="odevKoduSelect" style="width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; outline: none;">
+                        <option value="">Ödev Seçiniz...</option>
+                    </select>
+                    <textarea id="submissionContent" placeholder="Kodlarını buraya yapıştır..."></textarea>
+                    <button class="btn-primary" style="width: 100%;" id="submitOdev">Ödevi Gönder</button>
+                </div>
+            </div>
+
+            <div class="content-card glass-panel" id="pastSubmissionsCard">
+                <h3><span>💬</span> Geçmiş Ödevlerim & Mesajlar</h3>
+                <div id="pastSubmissionsContainer" class="submission-area">
+                    <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz puanlanmış bir ödevin bulunmuyor.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script type="module" src="../js/egitim.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <link rel="icon" type="image/png" href="../foto/logo.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli - YGT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stiller/styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("_Cw6kyPWX_IFJmlvv");
+        })();
+    </script>
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .admin-section {
+            padding: 30px;
+        }
+
+        .admin-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .admin-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+        }
+
+        .submissions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .submission-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .submission-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sub-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sub-user h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .sub-user p {
+            color: #3b82f6;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .sub-date {
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .sub-content {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'monospace';
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .puanlama-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .puan-input {
+            width: 100px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .btn-approve {
+            background: linear-gradient(to right, #22c55e, #16a34a);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-approve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .manage-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .manage-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .manage-info p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .toggle-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.aktif {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            border: 1px solid #22c55e;
+        }
+
+        .toggle-btn.pasif {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="head scrolled">
+        <nav class="navbar">
+            <a href="../index.html" class="Logo_main">
+                <img src="../foto/logo.png" alt="Logo" class="nav-logo">
+                <div class="logo-text-group">
+                    <span class="txt-upper">YGT</span>
+                    <span class="txt-lower">Yönetim</span>
+                </div>
+            </a>
+            <div class="user-actions">
+                <a href="egitim.html" class="nav-link" style="margin-right: 20px;">Dashboard'a Dön</a>
+                <button class="logout-btn" id="logoutBtn" style="padding: 8px 15px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; border-radius: 8px; cursor: pointer;">Çıkış Yap</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <!-- Soru Ekleme Bölümü -->
+        <section class="admin-section glass-panel">
+            <h2><span>➕</span> Yeni Soru Ekle</h2>
+            <form id="addQuestionForm" class="admin-form">
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Soru Başlığı (Kategori)</label>
+                    <input type="text" id="qBaslik" placeholder="Örn: JavaScript Temelleri" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Soru Metni</label>
+                    <textarea id="qMetin" rows="3" placeholder="Soruyu buraya yazın..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Seçenek 1</label>
+                    <input type="text" class="qSecenek" placeholder="A şıkkı" required>
+                </div>
+                <div class="form-group">
+                    <label>Seçenek 2</label>
+                    <input type="text" class="qSecenek" placeholder="B şıkkı" required>
+                </div>
+                <div class="form-group">
+                    <label>Seçenek 3</label>
+                    <input type="text" class="qSecenek" placeholder="C şıkkı" required>
+                </div>
+                <div class="form-group">
+                    <label>Seçenek 4</label>
+                    <input type="text" class="qSecenek" placeholder="D şıkkı" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Doğru Cevap (Yukarıdaki seçeneklerden biriyle tam eşleşmeli)</label>
+                    <input type="text" id="qDogru" placeholder="Örn: 42" required>
+                </div>
+                <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Soruyu Yayınla</button>
+            </form>
+        </section>
+
+        <!-- Ödev Yayınlama Bölümü -->
+        <section class="admin-section glass-panel">
+            <h2><span>📢</span> Yeni Ödev Yayınla</h2>
+            <form id="addAssignmentForm" class="admin-form">
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Ödev Başlığı</label>
+                    <input type="text" id="aBaslik" placeholder="Örn: Hafta 1: HTML/CSS Giriş" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Ödev Açıklaması ve Yönergeler</label>
+                    <textarea id="aMetin" rows="5" placeholder="Öğrencilerin ne yapması gerektiğini detaylıca yazın..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Ödevi Yayınla (Aktif Olarak)</button>
+            </form>
+        </section>
+
+        <!-- Soru ve Ödev Yönetim Listeleri -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <section class="admin-section glass-panel">
+                <h2><span>⚙️</span> Soruları Yönet</h2>
+                <div id="manageQuestionsList" class="submissions-list">
+                    <p class="no-data">Yükleniyor...</p>
+                </div>
+            </section>
+            <section class="admin-section glass-panel">
+                <h2><span>⚙️</span> Ödevleri Yönet</h2>
+                <div id="manageAssignmentsList" class="submissions-list">
+                    <p class="no-data">Yükleniyor...</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Ödev Değerlendirme Bölümü -->
+        <section class="admin-section glass-panel">
+            <h2><span>⚖️</span> Bekleyen Ödevler</h2>
+            <div id="submissionsList" class="submissions-list">
+                <p class="no-data">Bekleyen ödevler yükleniyor...</p>
+            </div>
+        </section>
+
+        <!-- Öğrenci Cevapları / İtirazlar Bölümü -->
+        <section class="admin-section glass-panel">
+            <h2><span>💬</span> Öğrenci Cevapları & Mesajlar</h2>
+            <div id="studentRepliesList" class="submissions-list">
+                <p class="no-data">Mesajlar yükleniyor...</p>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="../js/admin.js"></script>
+</body>
+
+</html>
