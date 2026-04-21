@@ -244,11 +244,11 @@ async function loadPastSubmissions() {
                 <div style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px;">
                     <strong>Senin Kodun:</strong><br>${data.icerik.substring(0, 50)}...
                 </div>
-                <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 8px;">
+                <div style="background: rgba(59, 130, 246, 0.1); padding: 12px; border-radius: 8px; white-space: pre-wrap;">
                     <strong style="color: #60a5fa;">Admin Notu:</strong><br>
                     ${data.feedback || "Geri bildirim bırakılmadı."}
                 </div>
-                ${data.studentReply ? `<div style="margin-top: 10px; padding-left: 10px; border-left: 2px solid #64748b; font-size: 0.85rem; color: #94a3b8;"><strong>Senin Cevabın:</strong> ${data.studentReply}</div>` : ""}
+                ${data.studentReply ? `<div style="margin-top: 10px; padding-left: 10px; border-left: 2px solid #64748b; font-size: 0.85rem; color: #94a3b8; white-space: pre-wrap;"><strong>Senin Cevabın:</strong> ${data.studentReply}</div>` : ""}
                 ${replyHtml}
             `;
             container.appendChild(div);

@@ -291,7 +291,7 @@ async function loadStudentReplies() {
                     </div>
                     <div class="sub-date">${data.tarihReply ? data.tarihReply.toDate().toLocaleString('tr-TR') : ''}</div>
                 </div>
-                <div style="margin-bottom: 10px;"><strong>Admin:</strong> ${data.feedback}</div>
+                <div style="margin-bottom: 10px; white-space: pre-wrap;"><strong>Admin:</strong> ${data.feedback}</div>
                 <div class="sub-content" style="border-left: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.05);">
                     <strong>Öğrenci:</strong> ${data.studentReply}
                 </div>

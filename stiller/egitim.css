@@ -78,6 +78,7 @@
     font-weight: 600;
     margin-bottom: 15px;
     line-height: 1.6;
+    white-space: pre-wrap;
 }
 
 .options-grid {
