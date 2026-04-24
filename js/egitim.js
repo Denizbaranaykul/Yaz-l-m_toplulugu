@@ -41,6 +41,36 @@ const logoutBtn = document.getElementById('logoutBtn');
 const adminLink = document.getElementById('adminLink');
 const submitOdevBtn = document.getElementById('submitOdev');
 
+// TAB SİSTEMİ MANTIĞI
+function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(btn => {
+        btn.onclick = () => {
+            const targetTab = btn.getAttribute('data-tab');
+
+            // Temizlik
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => {
+                c.classList.remove('active');
+                c.style.display = 'none';
+            });
+
+            // Aktifleştirme
+            btn.classList.add('active');
+            const target = document.getElementById(targetTab);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = 'block';
+            }
+        };
+    });
+}
+
+// Başlat
+initTabs();
+
 // Oturum Kontrolü
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -62,11 +92,49 @@ onAuthStateChanged(auth, async (user) => {
     }
 
     // Verileri yükle
+    loadVideos();
     loadLeaderboard();
     loadQuestions();
     loadAssignments();
     loadPastSubmissions();
 });
+
+// Videoları Yükle
+async function loadVideos() {
+    const videoGrid = document.getElementById('videoGrid');
+    try {
+        const q = query(collection(db, "videos"), orderBy("tarih", "desc"));
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.empty) {
+            videoGrid.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px; grid-column: 1/-1;">Henüz eğitim videosu eklenmemiş.</p>';
+            return;
+        }
+
+        videoGrid.innerHTML = "";
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const vDiv = document.createElement('div');
+            vDiv.className = 'video-card glass-panel';
+            vDiv.innerHTML = `
+                <div class="video-wrapper">
+                    <iframe 
+                        src="${data.url}" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h4>${data.baslik}</h4>
+                <p>${data.aciklama}</p>
+            `;
+            videoGrid.appendChild(vDiv);
+        });
+    } catch (error) {
+        console.error("Videolar yüklenemedi:", error);
+    }
+}
 
 // Liderlik Tablosunu Yükle
 async function loadLeaderboard() {

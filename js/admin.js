@@ -31,6 +31,36 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+// Tab Sistemi
+function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    if (tabButtons.length === 0) return;
+
+    tabButtons.forEach(btn => {
+        btn.onclick = (e) => {
+            const targetTab = btn.getAttribute('data-tab');
+            
+            // Tüm butonları temizle
+            tabButtons.forEach(b => b.classList.remove('active'));
+            // Tüm içerikleri gizle
+            tabContents.forEach(c => {
+                c.classList.remove('active');
+                c.style.display = 'none';
+            });
+
+            // Seçileni aktif et
+            btn.classList.add('active');
+            const target = document.getElementById(targetTab);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = 'block';
+            }
+        };
+    });
+}
+
 // Yetki Kontrolü
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
@@ -46,6 +76,7 @@ onAuthStateChanged(auth, async (user) => {
     }
 
     // Yetki varsa yükle
+    initTabs();
     loadSubmissions();
     loadManagementLists();
     loadStudentReplies();
@@ -142,6 +173,38 @@ addAssignmentForm.addEventListener('submit', async (e) => {
         alert("Hata: " + error.message);
     }
 });
+
+// Video Ekleme Mantığı
+const addVideoForm = document.getElementById('addVideoForm');
+if (addVideoForm) {
+    addVideoForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const baslik = document.getElementById('vBaslik').value;
+        let url = document.getElementById('vUrl').value;
+        const aciklama = document.getElementById('vAciklama').value;
+
+        // YouTube Linkini Otomatik Düzenle (watch -> embed)
+        if (url.includes("watch?v=")) {
+            url = url.replace("watch?v=", "embed/").split("&")[0];
+        } else if (url.includes("youtu.be/")) {
+            url = url.replace("youtu.be/", "www.youtube.com/embed/").split("?")[0];
+        }
+
+        try {
+            await addDoc(collection(db, "videos"), {
+                baslik,
+                url,
+                aciklama,
+                tarih: serverTimestamp()
+            });
+            alert("Video başarıyla eklendi!");
+            addVideoForm.reset();
+            loadManagementLists();
+        } catch (error) {
+            alert("Hata: " + error.message);
+        }
+    });
+}
 
 // Bekleyen Ödevleri Yükle
 async function loadSubmissions() {
@@ -255,8 +318,30 @@ async function loadManagementLists() {
     const qList = document.getElementById('manageQuestionsList');
     const aList = document.getElementById('manageAssignmentsList');
     const bList = document.getElementById('manageBlogsList');
+    const vList = document.getElementById('manageVideosList');
 
-    // Soruları Çek
+    // Videoları Çek
+    try {
+        if (vList) {
+            const vSnap = await getDocs(query(collection(db, "videos"), orderBy("tarih", "desc")));
+            vList.innerHTML = vSnap.empty ? '<p class="no-data">Video yok.</p>' : "";
+            vSnap.forEach(vDoc => {
+                const data = vDoc.data();
+                const card = document.createElement('div');
+                card.className = 'manage-card';
+                card.innerHTML = `
+                    <div class="manage-info">
+                        <h4>${data.baslik}</h4>
+                        <p>${data.url.substring(0, 30)}...</p>
+                    </div>
+                    <button class="toggle-btn pasif" onclick="deleteItem('videos', '${vDoc.id}')" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">
+                        Sil
+                    </button>
+                `;
+                vList.appendChild(card);
+            });
+        }
+    } catch (e) { console.error(e); }
     try {
         const qSnap = await getDocs(query(collection(db, "questions"), orderBy("tarih", "desc")));
         qList.innerHTML = qSnap.empty ? '<p class="no-data">Soru yok.</p>' : "";
@@ -312,7 +397,7 @@ async function loadManagementLists() {
                         <h4>${data.baslik}</h4>
                         <p>${data.icerik.replace(/<[^>]*>?/gm, '').substring(0, 30)}...</p>
                     </div>
-                    <button class="toggle-btn pasif" onclick="deleteBlog('${bDoc.id}')" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">
+                    <button class="toggle-btn pasif" onclick="deleteItem('bloglar', '${bDoc.id}')" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">
                         Sil
                     </button>
                 `;
@@ -322,12 +407,12 @@ async function loadManagementLists() {
     } catch (e) { console.error(e); }
 }
 
-// Blog Silme
-window.deleteBlog = async (id) => {
-    if (!confirm("Bu blog yazısını silmek istediğinize emin misiniz?")) return;
+// Genel Silme Fonksiyonu
+window.deleteItem = async (coll, id) => {
+    if (!confirm("Bunu silmek istediğinize emin misiniz?")) return;
     try {
-        await deleteDoc(doc(db, "bloglar", id));
-        alert("Blog başarıyla silindi.");
+        await deleteDoc(doc(db, coll, id));
+        alert("Başarıyla silindi.");
         loadManagementLists();
     } catch (e) {
         alert("Silinemedi: " + e.message);

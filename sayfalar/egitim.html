@@ -41,57 +41,91 @@
                 <div class="user-info">
                     <h2 id="welcomeName">Yükleniyor...</h2>
                     <p id="userEmail">Lütfen bekleyin...</p>
-                    <a href="../index.html" class="dashboard-btn">Ana Sayfaya Dön</a>
-                    <a href="admin.html" class="admin-link" id="adminLink" style="margin-top: 10px;">Admin Paneline Git</a>
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <a href="../index.html" class="dashboard-btn">Ana Sayfaya Dön</a>
+                        <a href="admin.html" class="admin-link" id="adminLink" style="display: none;">Admin Paneli</a>
+                    </div>
                 </div>
                 <div class="user-score-badge">
-                    <span class="score" style="font-size: 1.2rem; padding: 10px 20px;" id="myScore">0 Puan</span>
+                    <span class="score" id="myScore">0 Puan</span>
                 </div>
             </div>
 
-            <!-- Liderlik Tablosu Buraya Taşındı -->
-            <div class="content-card glass-panel">
-                <h3><span></span> Liderlik Tablosu (Top 10)</h3>
-                <ul class="leaderboard-list" id="leaderboardContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                    <!-- Dinamik olarak dolacak -->
-                    <li style="text-align: center; padding: 20px; color: #94a3b8;">Yükleniyor...</li>
-                </ul>
+            <!-- TAB NAVİGASYONU -->
+            <div class="tab-menu glass-panel">
+                <button class="tab-btn active" data-tab="video-tab">
+                    <span class="tab-icon">🎬</span> Videolar
+                </button>
+                <button class="tab-btn" data-tab="soru-tab">
+                    <span class="tab-icon">❓</span> Sorular
+                </button>
+                <button class="tab-btn" data-tab="odev-tab">
+                    <span class="tab-icon">📝</span> Ödevler
+                </button>
+                <button class="tab-btn" data-tab="liderlik-tab">
+                    <span class="tab-icon">🏆</span> Sıralama
+                </button>
             </div>
 
-            <div class="content-card glass-panel" id="questionsCard">
-                <h3><span></span> Günün Soruları</h3>
-                <div id="questionsContainer">
-                    <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz soru eklenmemiş.</p>
+            <!-- TAB İÇERİKLERİ -->
+            <div id="video-tab" class="tab-content active">
+                <div class="video-grid" id="videoGrid">
+                    <div class="video-card glass-panel">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <h4>Örnek Eğitim Videosu</h4>
+                        <p>Bu videoda temel kavramları öğreneceğiz.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="content-card glass-panel" id="assignmentsCard">
-                <h3><span></span> Aktif Ödevler</h3>
-                <div id="assignmentsContainer">
-                    <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz aktif ödev yayınlanmamış.</p>
+            <div id="soru-tab" class="tab-content">
+                <div class="content-card glass-panel" id="questionsCard">
+                    <h3><span></span> Günün Soruları</h3>
+                    <div id="questionsContainer">
+                        <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz soru eklenmemiş.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="content-card glass-panel">
-                <h3><span></span> Ödev Gönder</h3>
-                <div class="submission-area">
-                    <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;">Yazdığın kodu veya ödev metnini buraya yapıştırabilirsin.</p>
-                    <select id="odevKoduSelect" style="width: 100%; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; outline: none;">
-                        <option value="">Ödev Seçiniz...</option>
-                    </select>
-                    <textarea id="submissionContent" placeholder="Kodlarını buraya yapıştır..."></textarea>
-                    <button class="btn-primary" style="width: 100%;" id="submitOdev">Ödevi Gönder</button>
+            <div id="odev-tab" class="tab-content">
+                <div class="content-card glass-panel" id="assignmentsCard">
+                    <h3><span></span> Aktif Ödevler</h3>
+                    <div id="assignmentsContainer">
+                        <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz aktif ödev yayınlanmamış.</p>
+                    </div>
+                </div>
+
+                <div class="content-card glass-panel">
+                    <h3><span></span> Ödev Gönder</h3>
+                    <div class="submission-area">
+                        <p style="color: #94a3b8; margin-bottom: 15px; font-size: 0.9rem;">Yazdığın kodu veya ödev metnini buraya yapıştırabilirsin.</p>
+                        <select id="odevKoduSelect" class="styled-select">
+                            <option value="">Ödev Seçiniz...</option>
+                        </select>
+                        <textarea id="submissionContent" placeholder="Kodlarını buraya yapıştır..."></textarea>
+                        <button class="btn-primary" style="width: 100%;" id="submitOdev">Ödevi Gönder</button>
+                    </div>
+                </div>
+
+                <div class="content-card glass-panel" id="pastSubmissionsCard">
+                    <h3><span></span> Geçmiş Ödevlerim & Mesajlar</h3>
+                    <div id="pastSubmissionsContainer" class="submission-area">
+                        <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz puanlanmış bir ödevin bulunmuyor.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="content-card glass-panel" id="pastSubmissionsCard">
-                <h3><span></span> Geçmiş Ödevlerim & Mesajlar</h3>
-                <div id="pastSubmissionsContainer" class="submission-area">
-                    <p style="color: #94a3b8; text-align: center; padding: 20px;">Henüz puanlanmış bir ödevin bulunmuyor.</p>
+            <div id="liderlik-tab" class="tab-content">
+                <div class="content-card glass-panel">
+                    <h3><span></span> Liderlik Tablosu (Top 10)</h3>
+                    <ul class="leaderboard-list" id="leaderboardContainer">
+                        <li style="text-align: center; padding: 20px; color: #94a3b8;">Yükleniyor...</li>
+                    </ul>
                 </div>
             </div>
         </div>
-
     </main>
 
     <script type="module" src="../js/egitim.js"></script>

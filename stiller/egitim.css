@@ -13,6 +13,15 @@
     }
 }
 
+.tab-content {
+    display: none;
+    animation: tabFadeIn 0.5s ease forwards;
+}
+
+.tab-content.active {
+    display: block !important;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -52,6 +61,68 @@
 .logout-btn:hover {
     background: #ef4444;
     color: #fff;
+}
+
+/* --- TAB SİSTEMİ (PREMIUM) --- */
+.tab-menu {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 35px;
+    padding: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: rgba(30, 41, 59, 0.4);
+    border-radius: 24px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    padding: 14px 28px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transition: 0.5s;
+}
+
+.tab-btn:hover::before {
+    left: 100%;
+}
+
+.tab-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--primary) 0%, #06b6d4 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 10px 25px -5px rgba(8, 160, 180, 0.4), 0 0 15px rgba(8, 160, 180, 0.2);
+}
+
+.tab-icon {
+    font-size: 1.2rem;
 }
 
 .content-card {

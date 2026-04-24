@@ -37,119 +37,163 @@
     </header>
 
     <main class="admin-container">
-        <!-- Blog Yazısı Ekleme Bölümü -->
-        <section class="admin-section glass-panel">
-            <h2><span></span> Yeni Blog Yazısı Ekle</h2>
-            <form id="addBlogForm" class="admin-form">
-                <div class="form-group">
-                    <label>Blog Başlığı</label>
-                    <input type="text" id="bBaslik" placeholder="Örn: React ile State Yönetimi" required>
-                </div>
-                <div class="form-group">
-                    <label>Yazar</label>
-                    <input type="text" id="bYazar" placeholder="Adınız Soyadınız" required>
-                </div>
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Fotoğraf Dosya Adı (Örn: resim.jpg)</label>
-                    <input type="text" id="bFotoIsim" placeholder="foto klasöründeki dosya adı" required>
-                </div>
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Blog İçeriği (HTML destekler)</label>
-                    <textarea id="bIcerik" rows="8" placeholder="Blog içeriğini buraya yazın..." required></textarea>
-                </div>
-                <button type="submit" class="btn-primary" id="blogSubmitBtn" style="grid-column: span 2; margin-top: 10px;">Blogu Yayınla</button>
-            </form>
-        </section>
+        <!-- TAB NAVİGASYONU -->
+        <div class="tab-menu glass-panel" style="margin-bottom: 30px;">
+            <button class="tab-btn active" data-tab="blog-admin">Blog</button>
+            <button class="tab-btn" data-tab="video-admin">Videolar</button>
+            <button class="tab-btn" data-tab="soru-admin">Sorular</button>
+            <button class="tab-btn" data-tab="odev-admin">Ödevler</button>
+            <button class="tab-btn" data-tab="submission-admin">Teslimler</button>
+        </div>
 
-        <!-- Soru Ekleme Bölümü -->
-        <section class="admin-section glass-panel">
-            <h2><span></span> Yeni Soru Ekle</h2>
-            <form id="addQuestionForm" class="admin-form">
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Soru Başlığı (Kategori)</label>
-                    <input type="text" id="qBaslik" placeholder="Örn: JavaScript Temelleri" required>
-                </div>
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Soru Metni</label>
-                    <textarea id="qMetin" rows="3" placeholder="Soruyu buraya yazın..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Seçenek 1</label>
-                    <input type="text" class="qSecenek" placeholder="A şıkkı" required>
-                </div>
-                <div class="form-group">
-                    <label>Seçenek 2</label>
-                    <input type="text" class="qSecenek" placeholder="B şıkkı" required>
-                </div>
-                <div class="form-group">
-                    <label>Seçenek 3</label>
-                    <input type="text" class="qSecenek" placeholder="C şıkkı" required>
-                </div>
-                <div class="form-group">
-                    <label>Seçenek 4</label>
-                    <input type="text" class="qSecenek" placeholder="D şıkkı" required>
-                </div>
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Doğru Cevap (Yukarıdaki seçeneklerden biriyle tam eşleşmeli)</label>
-                    <input type="text" id="qDogru" placeholder="Örn: 42" required>
-                </div>
-                <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Soruyu Yayınla</button>
-            </form>
-        </section>
-
-        <!-- Ödev Yayınlama Bölümü -->
-        <section class="admin-section glass-panel">
-            <h2><span></span> Yeni Ödev Yayınla</h2>
-            <form id="addAssignmentForm" class="admin-form">
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Ödev Başlığı</label>
-                    <input type="text" id="aBaslik" placeholder="Örn: Hafta 1: HTML/CSS Giriş" required>
-                </div>
-                <div class="form-group" style="grid-column: span 2;">
-                    <label>Ödev Açıklaması ve Yönergeler</label>
-                    <textarea id="aMetin" rows="5" placeholder="Öğrencilerin ne yapması gerektiğini detaylıca yazın..." required></textarea>
-                </div>
-                <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Ödevi Yayınla (Aktif Olarak)</button>
-            </form>
-        </section>
-
-        <!-- Soru, Ödev ve Blog Yönetim Listeleri -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+        <!-- BLOG TAB -->
+        <div id="blog-admin" class="tab-content active">
             <section class="admin-section glass-panel">
-                <h2><span></span> Soruları Yönet</h2>
-                <div id="manageQuestionsList" class="submissions-list">
-                    <p class="no-data">Yükleniyor...</p>
-                </div>
+                <h2><span></span> Yeni Blog Yazısı Ekle</h2>
+                <form id="addBlogForm" class="admin-form">
+                    <div class="form-group">
+                        <label>Blog Başlığı</label>
+                        <input type="text" id="bBaslik" placeholder="Örn: React ile State Yönetimi" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Yazar</label>
+                        <input type="text" id="bYazar" placeholder="Adınız Soyadınız" required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Fotoğraf Dosya Adı (Örn: resim.jpg)</label>
+                        <input type="text" id="bFotoIsim" placeholder="foto klasöründeki dosya adı" required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Blog İçeriği (HTML destekler)</label>
+                        <textarea id="bIcerik" rows="8" placeholder="Blog içeriğini buraya yazın..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" id="blogSubmitBtn" style="grid-column: span 2; margin-top: 10px;">Blogu Yayınla</button>
+                </form>
             </section>
+
             <section class="admin-section glass-panel">
-                <h2><span></span> Ödevleri Yönet</h2>
-                <div id="manageAssignmentsList" class="submissions-list">
-                    <p class="no-data">Yükleniyor...</p>
-                </div>
-            </section>
-            <section class="admin-section glass-panel">
-                <h2><span></span> Blogları Yönet</h2>
+                <h2><span></span> Mevcut Blogları Yönet</h2>
                 <div id="manageBlogsList" class="submissions-list">
                     <p class="no-data">Yükleniyor...</p>
                 </div>
             </section>
         </div>
 
-        <!-- Ödev Değerlendirme Bölümü -->
-        <section class="admin-section glass-panel">
-            <h2><span></span> Bekleyen Ödevler</h2>
-            <div id="submissionsList" class="submissions-list">
-                <p class="no-data">Bekleyen ödevler yükleniyor...</p>
-            </div>
-        </section>
+        <!-- VİDEO TAB -->
+        <div id="video-admin" class="tab-content">
+            <section class="admin-section glass-panel">
+                <h2><span></span> Yeni Eğitim Videosu Ekle</h2>
+                <form id="addVideoForm" class="admin-form">
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Video Başlığı</label>
+                        <input type="text" id="vBaslik" placeholder="Örn: HTML Giriş" required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>YouTube Embed Linki (src kısmı)</label>
+                        <input type="url" id="vUrl" placeholder="https://www.youtube.com/embed/..." required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Kısa Açıklama</label>
+                        <textarea id="vAciklama" rows="3" placeholder="Video hakkında kısa bir bilgi..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Videoyu Yayınla</button>
+                </form>
+            </section>
 
-        <!-- Öğrenci Cevapları / İtirazlar Bölümü -->
-        <section class="admin-section glass-panel">
-            <h2><span></span> Öğrenci Cevapları & Mesajlar</h2>
-            <div id="studentRepliesList" class="submissions-list">
-                <p class="no-data">Mesajlar yükleniyor...</p>
-            </div>
-        </section>
+            <section class="admin-section glass-panel">
+                <h2><span></span> Mevcut Videoları Yönet</h2>
+                <div id="manageVideosList" class="submissions-list">
+                    <p class="no-data">Yükleniyor...</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- SORU TAB -->
+        <div id="soru-admin" class="tab-content">
+            <section class="admin-section glass-panel">
+                <h2><span></span> Yeni Soru Ekle</h2>
+                <form id="addQuestionForm" class="admin-form">
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Soru Başlığı (Kategori)</label>
+                        <input type="text" id="qBaslik" placeholder="Örn: JavaScript Temelleri" required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Soru Metni</label>
+                        <textarea id="qMetin" rows="3" placeholder="Soruyu buraya yazın..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Seçenek 1</label>
+                        <input type="text" class="qSecenek" placeholder="A şıkkı" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Seçenek 2</label>
+                        <input type="text" class="qSecenek" placeholder="B şıkkı" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Seçenek 3</label>
+                        <input type="text" class="qSecenek" placeholder="C şıkkı" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Seçenek 4</label>
+                        <input type="text" class="qSecenek" placeholder="D şıkkı" required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Doğru Cevap (Tam eşleşmeli)</label>
+                        <input type="text" id="qDogru" placeholder="Örn: 42" required>
+                    </div>
+                    <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Soruyu Yayınla</button>
+                </form>
+            </section>
+
+            <section class="admin-section glass-panel">
+                <h2><span></span> Mevcut Soruları Yönet</h2>
+                <div id="manageQuestionsList" class="submissions-list">
+                    <p class="no-data">Yükleniyor...</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ÖDEV TAB -->
+        <div id="odev-admin" class="tab-content">
+            <section class="admin-section glass-panel">
+                <h2><span></span> Yeni Ödev Yayınla</h2>
+                <form id="addAssignmentForm" class="admin-form">
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Ödev Başlığı</label>
+                        <input type="text" id="aBaslik" placeholder="Örn: Hafta 1: HTML/CSS Giriş" required>
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <label>Ödev Açıklaması ve Yönergeler</label>
+                        <textarea id="aMetin" rows="5" placeholder="Öğrencilerin ne yapması gerektiğini detaylıca yazın..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="grid-column: span 2; margin-top: 10px;">Ödevi Yayınla</button>
+                </form>
+            </section>
+
+            <section class="admin-section glass-panel">
+                <h2><span></span> Mevcut Ödevleri Yönet</h2>
+                <div id="manageAssignmentsList" class="submissions-list">
+                    <p class="no-data">Yükleniyor...</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- TESLİMLER TAB -->
+        <div id="submission-admin" class="tab-content">
+            <section class="admin-section glass-panel">
+                <h2><span></span> Bekleyen Ödev Teslimleri</h2>
+                <div id="submissionsList" class="submissions-list">
+                    <p class="no-data">Bekleyen ödevler yükleniyor...</p>
+                </div>
+            </section>
+
+            <section class="admin-section glass-panel">
+                <h2><span></span> Öğrenci Mesajları & İtirazlar</h2>
+                <div id="studentRepliesList" class="submissions-list">
+                    <p class="no-data">Mesajlar yükleniyor...</p>
+                </div>
+            </section>
+        </div>
     </main>
 
     <script type="module" src="../js/admin.js"></script>
