@@ -37,6 +37,30 @@
     </header>
 
     <main class="admin-container">
+        <!-- Blog Yazısı Ekleme Bölümü -->
+        <section class="admin-section glass-panel">
+            <h2><span></span> Yeni Blog Yazısı Ekle</h2>
+            <form id="addBlogForm" class="admin-form">
+                <div class="form-group">
+                    <label>Blog Başlığı</label>
+                    <input type="text" id="bBaslik" placeholder="Örn: React ile State Yönetimi" required>
+                </div>
+                <div class="form-group">
+                    <label>Yazar</label>
+                    <input type="text" id="bYazar" placeholder="Adınız Soyadınız" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Fotoğraf Dosya Adı (Örn: resim.jpg)</label>
+                    <input type="text" id="bFotoIsim" placeholder="foto klasöründeki dosya adı" required>
+                </div>
+                <div class="form-group" style="grid-column: span 2;">
+                    <label>Blog İçeriği (HTML destekler)</label>
+                    <textarea id="bIcerik" rows="8" placeholder="Blog içeriğini buraya yazın..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" id="blogSubmitBtn" style="grid-column: span 2; margin-top: 10px;">Blogu Yayınla</button>
+            </form>
+        </section>
+
         <!-- Soru Ekleme Bölümü -->
         <section class="admin-section glass-panel">
             <h2><span></span> Yeni Soru Ekle</h2>
@@ -89,8 +113,8 @@
             </form>
         </section>
 
-        <!-- Soru ve Ödev Yönetim Listeleri -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+        <!-- Soru, Ödev ve Blog Yönetim Listeleri -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
             <section class="admin-section glass-panel">
                 <h2><span></span> Soruları Yönet</h2>
                 <div id="manageQuestionsList" class="submissions-list">
@@ -100,6 +124,12 @@
             <section class="admin-section glass-panel">
                 <h2><span></span> Ödevleri Yönet</h2>
                 <div id="manageAssignmentsList" class="submissions-list">
+                    <p class="no-data">Yükleniyor...</p>
+                </div>
+            </section>
+            <section class="admin-section glass-panel">
+                <h2><span></span> Blogları Yönet</h2>
+                <div id="manageBlogsList" class="submissions-list">
                     <p class="no-data">Yükleniyor...</p>
                 </div>
             </section>

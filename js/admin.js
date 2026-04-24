@@ -12,7 +12,8 @@ import {
     increment, 
     writeBatch,
     serverTimestamp,
-    orderBy
+    orderBy,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -49,6 +50,46 @@ onAuthStateChanged(auth, async (user) => {
     loadManagementLists();
     loadStudentReplies();
 });
+
+// Blog Ekleme Mantığı
+const addBlogForm = document.getElementById('addBlogForm');
+if (addBlogForm) {
+    addBlogForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('blogSubmitBtn');
+        const originalText = submitBtn.innerText;
+        
+        const baslik = document.getElementById('bBaslik').value;
+        const yazar = document.getElementById('bYazar').value;
+        const icerik = document.getElementById('bIcerik').value;
+        const fotoIsim = document.getElementById('bFotoIsim').value;
+
+        try {
+            submitBtn.innerText = "Yayınlanıyor...";
+            submitBtn.disabled = true;
+
+            // Firestore'a kaydet (Sadece dosya ismini tutuyoruz)
+            await addDoc(collection(db, "bloglar"), {
+                baslik,
+                yazar,
+                fotoUrl: fotoIsim, // Sadece dosya adı
+                icerik,
+                tarih: serverTimestamp()
+            });
+
+            alert("Blog yazısı başarıyla yayınlandı! Lütfen fotoğrafı 'foto' klasörüne eklemeyi unutmayın.");
+            addBlogForm.reset();
+            loadManagementLists();
+        } catch (error) {
+            console.error("Hata:", error);
+            alert("Blog eklenirken bir hata oluştu: " + error.message);
+        } finally {
+            submitBtn.innerText = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+}
 
 // Soru Ekleme Mantığı
 const addQuestionForm = document.getElementById('addQuestionForm');
@@ -209,10 +250,11 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
     });
 });
 
-// Soru ve Ödev Yönetim Listelerini Yükle
+// Soru, Ödev ve Blog Yönetim Listelerini Yükle
 async function loadManagementLists() {
     const qList = document.getElementById('manageQuestionsList');
     const aList = document.getElementById('manageAssignmentsList');
+    const bList = document.getElementById('manageBlogsList');
 
     // Soruları Çek
     try {
@@ -255,7 +297,42 @@ async function loadManagementLists() {
             aList.appendChild(card);
         });
     } catch (e) { console.error(e); }
+
+    // Blogları Çek
+    try {
+        if (bList) {
+            const bSnap = await getDocs(query(collection(db, "bloglar"), orderBy("tarih", "desc")));
+            bList.innerHTML = bSnap.empty ? '<p class="no-data">Blog yok.</p>' : "";
+            bSnap.forEach(bDoc => {
+                const data = bDoc.data();
+                const card = document.createElement('div');
+                card.className = 'manage-card';
+                card.innerHTML = `
+                    <div class="manage-info">
+                        <h4>${data.baslik}</h4>
+                        <p>${data.icerik.replace(/<[^>]*>?/gm, '').substring(0, 30)}...</p>
+                    </div>
+                    <button class="toggle-btn pasif" onclick="deleteBlog('${bDoc.id}')" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.2);">
+                        Sil
+                    </button>
+                `;
+                bList.appendChild(card);
+            });
+        }
+    } catch (e) { console.error(e); }
 }
+
+// Blog Silme
+window.deleteBlog = async (id) => {
+    if (!confirm("Bu blog yazısını silmek istediğinize emin misiniz?")) return;
+    try {
+        await deleteDoc(doc(db, "bloglar", id));
+        alert("Blog başarıyla silindi.");
+        loadManagementLists();
+    } catch (e) {
+        alert("Silinemedi: " + e.message);
+    }
+};
 
 // Global Toggle Fonksiyonu
 window.toggleStatus = async (coll, id, currentStatus) => {
