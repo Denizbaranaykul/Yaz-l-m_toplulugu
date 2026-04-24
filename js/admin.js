@@ -180,6 +180,7 @@ if (addVideoForm) {
     addVideoForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const baslik = document.getElementById('vBaslik').value;
+        const seriIsmi = document.getElementById('vSeri').value;
         let url = document.getElementById('vUrl').value;
         const aciklama = document.getElementById('vAciklama').value;
 
@@ -193,6 +194,7 @@ if (addVideoForm) {
         try {
             await addDoc(collection(db, "videos"), {
                 baslik,
+                seriIsmi,
                 url,
                 aciklama,
                 tarih: serverTimestamp()

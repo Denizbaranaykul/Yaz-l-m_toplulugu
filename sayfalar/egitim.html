@@ -69,18 +69,22 @@
 
             <!-- TAB İÇERİKLERİ -->
             <div id="video-tab" class="tab-content active">
+                <div class="filter-bar">
+                    <select id="videoFilter" class="styled-select" style="max-width: 250px;">
+                        <option value="all">Tüm Seriler</option>
+                    </select>
+                </div>
                 <div class="video-grid" id="videoGrid">
-                    <div class="video-card glass-panel">
-                        <div class="video-wrapper">
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <h4>Örnek Eğitim Videosu</h4>
-                        <p>Bu videoda temel kavramları öğreneceğiz.</p>
-                    </div>
+                    <!-- Videolar buraya gelecek -->
                 </div>
             </div>
 
             <div id="soru-tab" class="tab-content">
+                <div class="filter-bar">
+                    <select id="questionFilter" class="styled-select" style="max-width: 250px;">
+                        <option value="all">Tüm Konular</option>
+                    </select>
+                </div>
                 <div class="content-card glass-panel" id="questionsCard">
                     <h3><span></span> Günün Soruları</h3>
                     <div id="questionsContainer">

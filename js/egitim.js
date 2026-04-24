@@ -99,45 +99,72 @@ onAuthStateChanged(auth, async (user) => {
     loadPastSubmissions();
 });
 
+let allVideos = [];
+let allQuestions = [];
+
 // Videoları Yükle
 async function loadVideos() {
     const videoGrid = document.getElementById('videoGrid');
+    const videoFilter = document.getElementById('videoFilter');
+    
     try {
         const q = query(collection(db, "videos"), orderBy("tarih", "desc"));
         const querySnapshot = await getDocs(q);
 
-        if (querySnapshot.empty) {
-            videoGrid.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px; grid-column: 1/-1;">Henüz eğitim videosu eklenmemiş.</p>';
-            return;
-        }
+        allVideos = [];
+        const series = new Set();
 
-        videoGrid.innerHTML = "";
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            const vDiv = document.createElement('div');
-            vDiv.className = 'video-card glass-panel';
-            vDiv.innerHTML = `
-                <div class="video-wrapper">
-                    <iframe 
-                        src="${data.url}" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <h4>${data.baslik}</h4>
-                <p>${data.aciklama}</p>
-            `;
-            videoGrid.appendChild(vDiv);
+            allVideos.push({ id: doc.id, ...data });
+            if (data.seriIsmi) series.add(data.seriIsmi);
         });
+
+        // Filtreyi Doldur
+        videoFilter.innerHTML = '<option value="all">Tüm Seriler</option>';
+        series.forEach(s => {
+            videoFilter.innerHTML += `<option value="${s}">${s}</option>`;
+        });
+
+        renderVideos('all');
     } catch (error) {
         console.error("Videolar yüklenemedi:", error);
     }
 }
 
+function renderVideos(filter) {
+    const videoGrid = document.getElementById('videoGrid');
+    const filtered = filter === 'all' ? allVideos : allVideos.filter(v => v.seriIsmi === filter);
+
+    if (filtered.length === 0) {
+        videoGrid.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px; grid-column: 1/-1;">Bu seride henüz video bulunmuyor.</p>';
+        return;
+    }
+
+    videoGrid.innerHTML = "";
+    filtered.forEach((data) => {
+        const vDiv = document.createElement('div');
+        vDiv.className = 'video-card glass-panel';
+        vDiv.innerHTML = `
+            <div class="video-wrapper">
+                <iframe 
+                    src="${data.url}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <h4>${data.baslik}</h4>
+            <p>${data.aciklama}</p>
+        `;
+        videoGrid.appendChild(vDiv);
+    });
+}
+
 // Liderlik Tablosunu Yükle
 async function loadLeaderboard() {
+    const leaderboardContainer = document.getElementById('leaderboardContainer');
     try {
         const q = query(collection(db, "users"), orderBy("score", "desc"), limit(10));
         const querySnapshot = await getDocs(q);
@@ -164,61 +191,87 @@ async function loadLeaderboard() {
 
 // Soruları Yükle
 async function loadQuestions() {
+    const questionsContainer = document.getElementById('questionsContainer');
+    const questionFilter = document.getElementById('questionFilter');
+
     try {
         const q = query(collection(db, "questions"), where("aktif", "==", true));
         const querySnapshot = await getDocs(q);
 
-        questionsContainer.innerHTML = "";
-        if (querySnapshot.empty) {
-            questionsContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">Şu an aktif soru bulunmuyor.</p>';
-            return;
-        }
+        allQuestions = [];
+        const categories = new Set();
+
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            const qId = doc.id;
-
-            const qDiv = document.createElement('div');
-            qDiv.className = 'question-item';
-
-            let optionsHtml = "";
-            data.secenekler.forEach((opt, index) => {
-                optionsHtml += `<button class="option-btn" onclick="checkAnswer('${qId}', '${opt}', this)">${opt}</button>`;
-            });
-
-            qDiv.innerHTML = `
-                <div class="question-text">${data.baslik}: ${data.soru_metni}</div>
-                <div class="options-grid">${optionsHtml}</div>
-                <div id="feedback-${qId}" style="margin-top: 10px; font-weight: 600; display: none;"></div>
-            `;
-            questionsContainer.appendChild(qDiv);
+            allQuestions.push({ id: doc.id, ...data });
+            if (data.baslik) categories.add(data.baslik);
         });
 
-        // Global fonksiyon olarak ata (checkAnswer)
-        window.checkAnswer = async (qId, selected, btn) => {
-            const qDoc = await getDoc(doc(db, "questions", qId));
-            const correct = qDoc.data().dogruCevap;
-            const feedback = document.getElementById(`feedback-${qId}`);
+        // Filtreyi Doldur
+        questionFilter.innerHTML = '<option value="all">Tüm Konular</option>';
+        categories.forEach(c => {
+            questionFilter.innerHTML += `<option value="${c}">${c}</option>`;
+        });
 
-            // Tüm butonları pasif yap
-            const btns = btn.parentElement.querySelectorAll('.option-btn');
-            btns.forEach(b => b.disabled = true);
-
-            if (selected === correct) {
-                btn.classList.add('correct');
-                feedback.innerText = "✅ Tebrikler! Doğru cevap.";
-                feedback.style.color = "#22c55e";
-            } else {
-                btn.classList.add('wrong');
-                feedback.innerText = `❌ Yanlış cevap. Doğru: ${correct}`;
-                feedback.style.color = "#ef4444";
-            }
-            feedback.style.display = "block";
-        };
-
+        renderQuestions('all');
     } catch (error) {
         console.error("Sorular yüklenemedi:", error);
     }
 }
+
+function renderQuestions(filter) {
+    const questionsContainer = document.getElementById('questionsContainer');
+    const filtered = filter === 'all' ? allQuestions : allQuestions.filter(q => q.baslik === filter);
+
+    questionsContainer.innerHTML = "";
+    if (filtered.length === 0) {
+        questionsContainer.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">Bu konuda soru bulunmuyor.</p>';
+        return;
+    }
+
+    filtered.forEach((data) => {
+        const qId = data.id;
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question-item';
+
+        let optionsHtml = "";
+        data.secenekler.forEach((opt) => {
+            optionsHtml += `<button class="option-btn" onclick="checkAnswer('${qId}', '${opt}', this)">${opt}</button>`;
+        });
+
+        qDiv.innerHTML = `
+            <div class="question-text">${data.baslik}: ${data.soru_metni}</div>
+            <div class="options-grid">${optionsHtml}</div>
+            <div id="feedback-${qId}" style="margin-top: 10px; font-weight: 600; display: none;"></div>
+        `;
+        questionsContainer.appendChild(qDiv);
+    });
+
+    // Global fonksiyon olarak ata (checkAnswer)
+    window.checkAnswer = async (qId, selected, btn) => {
+        const qDoc = await getDoc(doc(db, "questions", qId));
+        const correct = qDoc.data().dogruCevap;
+        const feedback = document.getElementById(`feedback-${qId}`);
+
+        const btns = btn.parentElement.querySelectorAll('.option-btn');
+        btns.forEach(b => b.disabled = true);
+
+        if (selected === correct) {
+            btn.classList.add('correct');
+            feedback.innerText = "✅ Tebrikler! Doğru cevap.";
+            feedback.style.color = "#22c55e";
+        } else {
+            btn.classList.add('wrong');
+            feedback.innerText = `❌ Yanlış cevap. Doğru: ${correct}`;
+            feedback.style.color = "#ef4444";
+        }
+        feedback.style.display = "block";
+    };
+}
+
+// Filtre Değişim Dinleyicileri
+document.getElementById('videoFilter').addEventListener('change', (e) => renderVideos(e.target.value));
+document.getElementById('questionFilter').addEventListener('change', (e) => renderQuestions(e.target.value));
 
 // Ödevleri Yükle
 async function loadAssignments() {
