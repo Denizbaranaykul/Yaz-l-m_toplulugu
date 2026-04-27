@@ -28,7 +28,8 @@ const submitBtn = document.querySelector('.submit-btn');
 
 // --- 5. FORM GÖNDERME OLAYI DİNLEYİCİSİ ---
 form.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Sayfanın varsayılan yenilenmesini engelle
+    e.preventDefault(); // sayfanın varsayılan yenılenmesını engelle 
+                        // bunu yapmazsak firebase'e veriler gitmiyor
 
     // Buton durumunu güncelle (Gönderiliyor...)
     const originalText = submitBtn.innerText;
@@ -49,8 +50,7 @@ form.addEventListener('submit', async (e) => {
         soruYazilim: document.getElementById('soru_yazilim').value,
         soruHobi: document.getElementById('soru_hobi').value,
         soruFikir: document.getElementById('soru_fikir').value,
-        // Başvuru tarihini ekler
-        basvuruTarihi: new Date().toLocaleString()
+        basvuruTarihi: new Date().toLocaleString()  // Başvuru tarihini ekleme
     };
 
     // --- 7. VERİYİ FIRESTORE'A KAYDETME ---

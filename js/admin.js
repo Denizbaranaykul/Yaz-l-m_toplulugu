@@ -17,7 +17,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
+//firebase bağlantıları
 // Firebase Ayarları
+
 const firebaseConfig = {
     apiKey: "AIzaSyAPa4-8qVuExM5RP32JcnP2cq5L391uwfU",
     authDomain: "yazilim-gelistirme-web-site.firebaseapp.com",
@@ -31,7 +33,8 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// Tab Sistemi
+//tıklanınca o tıklanılan şeyi aktif etmesini sağla
+
 function initTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -61,7 +64,8 @@ function initTabs() {
     });
 }
 
-// Yetki Kontrolü
+// Yetki Kontrolü 
+
 onAuthStateChanged(auth, async (user) => {
     if (!user) {
         window.location.href = "login.html";
@@ -75,7 +79,8 @@ onAuthStateChanged(auth, async (user) => {
         return;
     }
 
-    // Yetki varsa yükle
+    // Yetki varsa yüklenecekler 
+
     initTabs();
     loadSubmissions();
     loadManagementLists();
@@ -83,6 +88,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 // Blog Ekleme Mantığı
+
 const addBlogForm = document.getElementById('addBlogForm');
 if (addBlogForm) {
     addBlogForm.addEventListener('submit', async (e) => {
@@ -106,12 +112,14 @@ if (addBlogForm) {
                 yazar,
                 fotoUrl: fotoIsim, // Sadece dosya adı
                 icerik,
-                tarih: serverTimestamp()
+                tarih: serverTimestamp() // serverin saatini alır
             });
 
             alert("Blog yazısı başarıyla yayınlandı! Lütfen fotoğrafı 'foto' klasörüne eklemeyi unutmayın.");
             addBlogForm.reset();
             loadManagementLists();
+            
+            //blog error
         } catch (error) {
             console.error("Hata:", error);
             alert("Blog eklenirken bir hata oluştu: " + error.message);
