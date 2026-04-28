@@ -71,4 +71,5 @@ form.addEventListener('submit', async (e) => {
         submitBtn.innerText = originalText;
         submitBtn.disabled = false;
     }
+    
 });

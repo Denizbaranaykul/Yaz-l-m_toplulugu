@@ -81,13 +81,14 @@
                     </button>
 
                 </div>
-                <a href="GIDECEK_LINK_BURAYA" target="_blank" class = "Kuzenzo-resim-link">
+                    <a href="#kuzenzo-ai-bolumu" class="Kuzenzo-resim-link">
                     <img src="foto/Kuzenzo.png" alt="Kuzenzo AI'a Git">
-                </a>
+                    </a>
                 
             </div>
             <div class="glow-effect"></div>
-        </div>
+        </div>       
+        
 
         <section id="latest-blogs" class="blog-preview-section">
             <div class="section-header">
@@ -101,9 +102,23 @@
             <div class="view-all-container">
                 <button class="btn-secondary" onclick="window.location.href='sayfalar/blog.html'">Tümünü Gör</button>
             </div>
+            
+        </section>
+        <h1 class = YZ_asistan>Yapay Zeka Asistanımız</h1>
+            <section id="kuzenzo-ai-bolumu" class="ai-section">
+            <div id="chat-box">
+                <h2>Kuzenzo AI Asistanı</h2>
+                <div id="messages">
+                    <div class="message ai-msg">Merhaba! Ben Kuzenzo AI. Yazılım Geliştirme Topluluğu hakkında bana her şeyi sorabilirsin.</div>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="userInput" placeholder="Mesajınızı yazın..." onkeypress="handleKeyPress(event)">
+                    <button onclick="sendMessage()">Gönder</button>
+                </div>
+            </div>
         </section>
 
-       
+
 
         <section class="Memembers" id="projects">
             <div class="section-header">
@@ -161,7 +176,7 @@
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="foto/scarface2.jpeg" alt="Yeni Üye 2">
+                            <img src="foto/scarface2.jpeg" alt="Scarface">
                         </div>
                         <div class="project-content">
                             <div class="role-badge">Proje ve Eğitim Departmanı Başkanı</div>
@@ -175,14 +190,14 @@
 
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="foto/nur2.jpg" alt="ilknur durmaz">
+                            <img src="foto/Elif.jpeg" alt="Elif Gök">
                         </div>
                         <div class="project-content">
                             <div class="role-badge">İletişim ve Sponsorluk Departmanı Başkanı</div>
-                            <h3>İlknur Durmaz</h3>
+                            <h3>Elif Gök</h3>
                             <div class="project-buttons">
                                 <button class="btn-sm-secondary"
-                                    onclick="go_to_link('https://www.linkedin.com/in/ilknur-durmaz-6433a5321/')">LinkedIn</button>
+                                    onclick="go_to_link('')">LinkedIn</button>
                             </div>
                         </div>
                     </div>
@@ -191,11 +206,11 @@
 
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="foto/mehmet.jpeg" alt="Yeni Üye 3">
+                            <img src="foto/dilara.jpeg" alt="Dilara Yolcu">
                         </div>
                         <div class="project-content">
                             <div class="role-badge">Sosyal Medya Departmanı Başkanı</div>
-                            <h3>Mehmet Çıkrıkçı</h3>
+                            <h3>Dilara Yolcu</h3>
                             <div class="project-buttons">
                                 <button class="btn-sm-secondary">LinkedIn</button>
                             </div>
@@ -203,10 +218,10 @@
                     </div>
                     <div class="project-card">
                         <div class="project-image">
-                            <img src="foto/firat.jpeg" alt="Yeni Üye 5">
+                            <img src="foto/firat.jpeg" alt="Fırat Poyraz">
                         </div>
                         <div class="project-content">
-                            <div class="role-badge">Ar-Ge Departmanı Başkanı</div>
+                            <div class="role-badge">Organizasyon Departmanı Başkanı</div>
                             <h3>Fırat Poyraz</h3>
                             <div class="project-buttons">
                                 <button class="btn-sm-secondary">LinkedIn</button>
@@ -214,18 +229,6 @@
                         </div>
                     </div>
 
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="foto/dilara.jpeg" alt="Yeni Üye 4">
-                        </div>
-                        <div class="project-content">
-                            <div class="role-badge">Organizasyon Departmanı Başkanı</div>
-                            <h3>Dilara Yolcu</h3>
-                            <div class="project-buttons">
-                                <button class="btn-sm-secondary">LinkedIn</button>
-                            </div>
-                        </div>
-                    </div>
 
 
                 </div>
@@ -264,6 +267,7 @@
       </div>
     </section>
   -->
+
         <footer class="site-footer" id="footer">
             <div class="footer-content">
                 <div class="footer-logo">
