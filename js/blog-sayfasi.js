@@ -1,18 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, query, orderBy, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-// Firebase Ayarları
-const firebaseConfig = {
-    apiKey: "AIzaSyAPa4-8qVuExM5RP32JcnP2cq5L391uwfU",
-    authDomain: "yazilim-gelistirme-web-site.firebaseapp.com",
-    projectId: "yazilim-gelistirme-web-site",
-    storageBucket: "yazilim-gelistirme-web-site.firebasestorage.app",
-    messagingSenderId: "373546414576",
-    appId: "1:373546414576:web:6c4c92603dd184c8736d35"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+import { db } from "./main/veritabani-ayarlari.js";
+import { collection, query, orderBy, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const blogContainer = document.getElementById('blog-container');
 const modal = document.getElementById('blogModal');
@@ -26,9 +13,9 @@ async function fetchAllBlogs() {
     try {
         const q = query(collection(db, "bloglar"), orderBy("tarih", "desc"));
         const querySnapshot = await getDocs(q);
-        
+
         blogContainer.innerHTML = '';
-        
+
         if (querySnapshot.empty) {
             blogContainer.innerHTML = '<p style="text-align:center; grid-column: 1/-1;">Henüz blog yazısı eklenmemiş.</p>';
             return;
@@ -37,7 +24,7 @@ async function fetchAllBlogs() {
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             const date = data.tarih?.toDate ? data.tarih.toDate().toLocaleDateString('tr-TR') : data.tarih;
-            
+
             const card = document.createElement('div');
             card.className = 'blog-card';
             card.innerHTML = `
@@ -56,7 +43,7 @@ async function fetchAllBlogs() {
                     </div>
                 </div>
             `;
-            
+
             card.onclick = () => openBlogModal(data);
             blogContainer.appendChild(card);
         });
@@ -90,7 +77,7 @@ async function openSpecificBlog(blogId) {
 // Modal Aç
 function openBlogModal(data) {
     const date = data.tarih?.toDate ? data.tarih.toDate().toLocaleDateString('tr-TR') : data.tarih;
-    
+
     // Markdown-like Bold İşleme (**metin** -> <strong>metin</strong>)
     let processedContent = data.icerik || "";
     processedContent = processedContent.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -108,7 +95,7 @@ function openBlogModal(data) {
             </div>
         </div>
     `;
-    
+
     modal.style.display = "block";
     document.body.style.overflow = "hidden"; // Kaydırmayı engelle
 }
@@ -128,5 +115,8 @@ window.onclick = (event) => {
     }
 };
 
-// Başlat
-document.addEventListener('DOMContentLoaded', fetchAllBlogs);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fetchAllBlogs);
+} else {
+    fetchAllBlogs();
+}

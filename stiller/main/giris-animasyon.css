@@ -1,0 +1,208 @@
+/* --- MATRIX CANVAS --- */
+#matrix-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- HERO SECTION --- */
+.top {
+  min-height: 100vh;
+  width: 100%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(29, 78, 216, 0.15), transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  background-color: var(--bg-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.gradient-text {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+}
+
+/* --- INTRO ANIMATION --- */
+#intro-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg-dark);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: overlayFadeOut 0.5s ease-in-out 3.37s forwards;
+}
+
+.intro-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-circle-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  z-index: 1;
+  overflow: visible;
+}
+
+.circle-path {
+  stroke-dasharray: 880;
+  stroke-dashoffset: 880;
+  animation: drawCircle 0.5s ease-in-out 2s forwards, circleFadeOut 0.5s ease-in-out 2.5s forwards;
+}
+
+.intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #fff;
+  opacity: 0;
+  animation: textFadeIn 1s ease-in-out 3.5s forwards, textFadeOut 0.5s ease-in-out 5.5s forwards;
+  text-shadow: 0 0 20px var(--primary);
+  z-index: 4;
+}
+
+.dragon-container {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: 50%;
+  left: 50%;
+  transform: translate(100vw, -50%);
+  animation: dragonEnter 2s ease-out forwards, dragonFloat 1.5s ease-in-out 2s infinite alternate, dragonExit 1.5s ease-in 2.5s forwards;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dragon-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+}
+
+@keyframes dragonEnter {
+  0% { transform: translate(100vw, -50%) scale(0.5); opacity: 0; }
+  60% { transform: translate(-60%, -50%) scale(1.1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes dragonFloat {
+  0% { margin-top: 0px; }
+  100% { margin-top: -15px; }
+}
+
+@keyframes dragonExit {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-150vw, -50%) scale(0.2); opacity: 0; }
+}
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes textFadeIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes circleFadeOut {
+  to { opacity: 0; }
+}
+
+@keyframes textFadeOut {
+  to { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+@keyframes overlayFadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* Hero Responsive */
+@media (max-width: 768px) {
+  .top {
+    padding: 6rem 1rem 2rem 1rem;
+  }
+
+  .gradient-text {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+
+  .dragon-container {
+    width: 200px;
+    height: 200px;
+  }
+}

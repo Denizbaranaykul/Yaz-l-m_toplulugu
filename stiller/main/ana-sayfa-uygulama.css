@@ -1,0 +1,85 @@
+/* --- APP SECTION --- */
+.app-section {
+  padding: 4rem 2rem;
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.app-label {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.app-content h1 {
+  font-size: 2rem;
+  margin: 15px 0;
+  color: #fff;
+}
+
+.app-content p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+}
+
+.app-features {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin-bottom: 30px;
+}
+
+.app-features li {
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.store-btn {
+  padding: 12px 25px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  background: #fff;
+  color: #000;
+  transition: 0.3s;
+}
+
+.store-btn:hover {
+  transform: scale(1.05);
+}
+
+.app-qr {
+  text-align: center;
+}
+
+.qr-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  color: #000;
+}
+
+.qr-image {
+  width: 120px;
+  height: 120px;
+  margin-top: 10px;
+}

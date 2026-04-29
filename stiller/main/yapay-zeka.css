@@ -1,0 +1,126 @@
+/* AI Bölümünü Ortalama ve Boşluk Bırakma */
+.ai-section {
+    padding: 20px 20px 40px 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.Kuzenzo-resim-link {
+    display: block;        
+    margin-top: 20px;
+    text-align: center;
+}
+
+.Kuzenzo-resim-link img {
+    width: 300px;      
+    height: 175px;          
+    border-radius: 30px; 
+    transition: transform 0.2s ease; 
+}
+
+.Kuzenzo-resim-link img:hover {
+    transform: scale(1.05); 
+}
+
+.Kuzenzo-resim-link img:active {
+    transform: scale(0.95); 
+}
+
+/* Ana Sohbet Kutusu */
+#chat-box {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(22, 33, 62, 0.7);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+#chat-box h2 {
+    text-align: center;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Mesajların Listelendiği Alan */
+#messages {
+    height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mesaj Baloncukları */
+.message {
+    margin-bottom: 15px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    line-height: 1.5;
+    color: white;
+    max-width: 75%;
+    word-wrap: break-word;
+}
+
+/* Kullanıcı Mesajı (Sağda) */
+.user-msg {
+    background-color: #0f3460;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+/* Yapay Zeka Mesajı (Solda) */
+.ai-msg {
+    background-color: #4589e9;
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+/* Mesaj Yazma Alanı */
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.3);
+    color: white;
+    outline: none;
+    font-size: 16px;
+}
+
+.input-area button {
+    padding: 15px 25px;
+    background-color: #4589e9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.input-area button:hover {
+    background-color: #4589e9;
+}
+
+.YZ_asistan {
+  text-align: center;
+  margin-bottom: 4rem;
+  margin-top: 70px;
+}
+
+/* Kaydırma Çubuğu (Scrollbar) Estetiği */
+#messages::-webkit-scrollbar { width: 8px; }
+#messages::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 4px; }
+#messages::-webkit-scrollbar-thumb { background: #4589e9; border-radius: 4px; }

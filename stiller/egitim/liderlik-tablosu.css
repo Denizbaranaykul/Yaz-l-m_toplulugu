@@ -1,0 +1,36 @@
+/* --- LİDERLİK TABLOSU --- */
+.leaderboard-list {
+    list-style: none;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leaderboard-item:last-child {
+    border-bottom: none;
+}
+
+.rank {
+    width: 30px;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+.student-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.score {
+    font-weight: 700;
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}

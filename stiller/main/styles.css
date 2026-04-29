@@ -1,0 +1,11 @@
+/* =========================================================
+   YAZILIM GELİŞTİRME TOPLULUĞU - STYLES.CSS (REFACTORED)
+   ========================================================= */
+
+@import url("./genel-ayarlar.css");
+@import url("./temel-etiketler.css");
+@import url("./giris-animasyon.css");
+@import url("./ansayfa-baskanlar.css");
+@import url("./ana-sayfa-uygulama.css");
+@import url("./blog-kartlari.css");
+@import url("./yapay-zeka.css");

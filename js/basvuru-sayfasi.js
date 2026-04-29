@@ -4,23 +4,8 @@
 
 // --- 1. FIREBASE SDK'LARINI İÇE AKTARMA ---
 // Firestore ve Firebase Core için gerekli fonksiyonlar
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-// --- 2. FIREBASE YAPILANDIRMASI ---
-// UYARI: Bu bilgiler herkese açık olduğu için HASSAS VERİLER DEĞİLDİR,
-// ancak bir web projesinin temel bağlantı noktalarıdır.
-const firebaseConfig = {
-    apiKey: "AIzaSyAPa4-8qVuExM5RP32JcnP2cq5L391uwfU",
-    authDomain: "yazilim-gelistirme-web-site.firebaseapp.com",
-    projectId: "yazilim-gelistirme-web-site",
-    storageBucket: "yazilim-gelistirme-web-site.firebasestorage.app",
-    messagingSenderId: "373546414576",
-    appId: "1:373546414576:web:6c4c92603dd184c8736d35"
-};
-
-// --- 3. FIREBASE VE FIRESTORE'U BAŞLATMA ---
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app); // Firestore veritabanı servisini başlatır
+import { db } from "./main/veritabani-ayarlari.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // --- 4. FORM VE BUTON ELEMENTLERİNİ SEÇME ---
 const form = document.getElementById('basvuruForm');

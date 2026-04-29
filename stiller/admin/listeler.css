@@ -1,0 +1,43 @@
+/* --- YÖNETİM LİSTELERİ --- */
+.manage-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.manage-info h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.manage-info p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.toggle-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.toggle-btn.aktif {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border: 1px solid #22c55e;
+}
+
+.toggle-btn.pasif {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border: 1px solid #ef4444;
+}

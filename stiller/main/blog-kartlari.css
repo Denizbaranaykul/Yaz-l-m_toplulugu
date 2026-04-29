@@ -1,0 +1,283 @@
+/* =========================================================
+   BLOG SECTIONS & CARDS (MODERN & PREMIUM)
+   ========================================================= */
+.blog-preview-section {
+    background: radial-gradient(circle at top right, rgba(8, 160, 180, 0.05), transparent);
+    padding: 100px 2rem;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin: 3rem auto 0;
+    max-width: 1200px;
+    justify-items: center;
+}
+
+.blog-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+}
+
+.blog-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(8, 160, 180, 0.1), transparent);
+    opacity: 0;
+    transition: 0.5s;
+    z-index: 0;
+}
+
+.blog-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    border-color: rgba(8, 160, 180, 0.4);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 20px rgba(8, 160, 180, 0.2);
+}
+
+.blog-card:hover::before {
+    opacity: 1;
+}
+
+.blog-card-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.1);
+}
+
+.blog-card-content {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.blog-card-content h3 {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+    transition: 0.3s;
+}
+
+.blog-card:hover .blog-card-content h3 {
+    color: var(--primary);
+}
+
+.blog-card-content p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.blog-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.read-more {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.blog-card:hover .read-more {
+    gap: 10px;
+}
+
+/* --- BLOG MODAL (PREMIUM) --- */
+.blog-modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(15px);
+    overflow-y: auto;
+    padding: 40px 20px;
+}
+
+.modal-content {
+    background-color: #0f172a;
+    margin: 2% auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 95%;
+    max-width: 1200px;
+    min-height: 80vh;
+    border-radius: 32px;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    animation: modalExpand 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalExpand {
+    from { transform: scaleX(0.7) translateY(50px); opacity: 0; }
+    to { transform: scaleX(1) translateY(0); opacity: 1; }
+}
+
+.close-modal {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 100;
+    transition: 0.3s;
+}
+
+.close-modal:hover {
+    background: var(--primary);
+    transform: rotate(90deg);
+}
+
+.modal-hero-image {
+    width: 100%;
+    height: 550px;
+    border-radius: 32px 32px 0 0;
+    object-fit: cover;
+}
+
+.modal-body-content {
+    padding: 3rem 4rem;
+}
+
+.modal-body-content h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal-meta {
+    margin-bottom: 2.5rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-meta span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.yazar-badge {
+    background: rgba(8, 160, 180, 0.1);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.modal-text {
+    line-height: 1.8;
+    color: #e2e8f0;
+    font-size: 1.15rem;
+    letter-spacing: 0.2px;
+    white-space: pre-wrap;
+}
+
+.modal-text p {
+    margin-bottom: 1.8rem;
+}
+
+.modal-text img {
+    max-width: 100%;
+    border-radius: 16px;
+    margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .blog-card {
+        max-width: 100%;
+    }
+
+    .modal-body-content {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .modal-body-content h2 {
+        font-size: 2rem;
+    }
+    
+    .modal-hero-image {
+        height: 280px;
+    }
+}
