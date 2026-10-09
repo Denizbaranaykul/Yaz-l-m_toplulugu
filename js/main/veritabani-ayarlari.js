@@ -5,12 +5,12 @@ import { getRemoteConfig } from "https://www.gstatic.com/firebasejs/10.7.1/fireb
 
 // Firebase Ayarları
 const firebaseConfig = {
-    apiKey: "AIzaSyAPa4-8qVuExM5RP32JcnP2cq5L391uwfU",
-    authDomain: "yazilim-gelistirme-web-site.firebaseapp.com",
-    projectId: "yazilim-gelistirme-web-site",
-    storageBucket: "yazilim-gelistirme-web-site.firebasestorage.app",
-    messagingSenderId: "373546414576",
-    appId: "1:373546414576:web:6c4c92603dd184c8736d35"
+    apiKey: "AIzaSyB_UK8jgneT7HwRs8rquwCllpVmJTjLzNg",
+    authDomain: "ygt-site.firebaseapp.com",
+    projectId: "ygt-site",
+    storageBucket: "ygt-site.firebasestorage.app",
+    messagingSenderId: "135655229509",
+    appId: "1:135655229509:web:f0d6e2071af6a45e3cbb2c"
 };
 
 // Başlat
