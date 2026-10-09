@@ -183,3 +183,33 @@ section {
   background: var(--primary);
   border-radius: 50%;
 }
+
+/* --- NELER YAPIYORUZ (ÖĞREN / ÜRET / PAYLAŞ) --- */
+.ecosystem .section-header p {
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.ecosystem .icon {
+  color: var(--primary);
+  background: rgba(8, 160, 180, 0.08);
+  border: 1px solid rgba(8, 160, 180, 0.25);
+  transition: 0.4s ease;
+}
+
+.ecosystem .card:hover .icon {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.card-step {
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
