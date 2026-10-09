@@ -11,10 +11,10 @@ import { initContactForm } from "./iletisim.js";
 import { initChatbot } from "./yapay-zeka.js";
 
 function initAll() {
-    fetchLatestBlogs();
+    // fetchLatestBlogs(); // Blog bölümü geçici olarak gizli
     initUIInteractions();
     initContactForm();
-    initChatbot();
+    // initChatbot(); // Kuzenzo AI geçici olarak gizli
 }
 
 // Sayfa yüklendiğinde çalıştırılacaklar
